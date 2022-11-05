@@ -20,7 +20,7 @@
 			<div class="title">
 				<h1>BotanicaLandia</h1>
 			</div>
-			<form action="RegisterSend.jsp" method="get">
+			<form action="RegisterSend.jsp" method="post">
 				<div class="formField">
 					<label for="username">Username</label>
 					<input type="text" name="username" class="username" required>
