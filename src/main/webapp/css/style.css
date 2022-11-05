@@ -186,12 +186,12 @@ td {
 	align-items: center;
 	position: absolute;
 	right: 0;
-	width: 8%;
+	width: 9%;
 	background: #1E8449;
 	overflow: hidden;
 	height: 0;
 	transition-property: height;
-  	transition-duration: 1s;
+  	transition-duration: 0.5s;
   	transition-timing-function: ease-in;
   	margin: auto;
   	border-bottom-left-radius: 8px;
@@ -255,7 +255,7 @@ td {
 	text-align: center;
 }
 
-.message > h1, h3 {
+.message:nth-child(1) {
 	padding: 5px;
 	color: white;
 }
