@@ -1,0 +1,50 @@
+<%@page import="org.hibernate.tool.hbm2ddl.UniqueConstraintSchemaUpdateStrategy"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="org.apache.commons.codec.digest.DigestUtils"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ page import="java.time.LocalDate"%>
+<%@ page import="com.jacaranda.users.*" %>
+<jsp:useBean id="daoUsers" class="com.jacaranda.control.UsersControl"></jsp:useBean>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<%
+	String username = request.getParameter("username");
+	String password = request.getParameter("password");
+	String name = request.getParameter("name");
+	String lastname = request.getParameter("lastname");
+	String birth = request.getParameter("birth");
+	String gender = request.getParameter("gender");
+
+	if (username != null && password != null && name != null && lastname != null && birth != null
+			&& gender != null) {
+		char genderChar = gender.charAt(0);
+		
+		//Parseamos la fecha recibida
+		LocalDate date = LocalDate.parse(birth);
+		
+		/*Creamos una cadena sumandole 1 al dia ya que al introducirlo 
+		a la base de datos se introduce con un dia menos*/
+		DateTimeFormatter format =  DateTimeFormatter.ofPattern("yyyy-M-d");
+		String dateString = date.getYear() + "-" + date.getMonthValue() + "-" + (date.getDayOfMonth() + 1);
+		LocalDate newDate = LocalDate.parse(dateString, format);
+		
+		String encriptedPassword = DigestUtils.md5Hex(password);
+		
+		Users user = new Users(username, encriptedPassword, name, lastname, newDate, genderChar, false);
+		
+		try {
+			daoUsers.registerUser(user);
+			response.sendRedirect("index.jsp");
+		} catch(Exception e) {
+			response.sendRedirect("register.jsp?msg=" + e.getMessage());
+		}
+	}
+	%>
+</body>
+</html>

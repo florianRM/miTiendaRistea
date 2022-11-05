@@ -1,0 +1,269 @@
+@charset "ISO-8859-1";
+
+body {
+	margin: 0;
+	height: 100vh;
+	font-family: sans-serif;
+	font-size: 15px;
+}
+
+/*Estilo pagina index */
+.container {
+	display: flex;
+	align-items: center;
+	height: 100vh;
+}
+
+.image {
+	float: left;
+	height: 50%;
+	width: 35%;
+	margin-left: 5%;
+	margin-right: -30%;
+	overflow: hidden;
+	border-radius: 10px;
+}
+
+.image img {
+	max-width: 530px;
+	border-radius: 10px;
+}
+
+.main {
+	border: solid 2px grey;
+	border-radius: 4px;
+	box-shadow: 5px 5px 3px 8px rgba(128, 139, 150, 0.4);
+	margin: auto;
+	height: 40%;
+	padding-bottom: 20px;
+	width: 25%;
+}
+
+form {
+	margin-top: 5%;
+}
+
+.title {
+	text-align: center;
+}
+
+.title > h1 {
+	color: #1E8449;
+}
+
+.formField {
+	margin: auto;
+	width: 50%;
+	margin-bottom: 10px;
+}
+
+.formField > input {
+	border-radius: 5px;
+	width: 95%;
+	padding: 3px;
+	border: solid 2px;
+}
+
+.buttons {
+	display: flex;
+	justify-content: center;
+	margin-top: 12px;
+}
+
+.buttons > button {
+	color: white;
+	background: #1E8449;
+	width: 50%;
+	border-radius: 5px;
+	border: none;
+	font-size: 15px;
+	padding: 6px;
+	cursor: pointer;
+}
+
+.login:disabled {
+	background: rgba(30, 132, 73, 0.7);
+	cursor: auto;
+}
+
+.error {
+	text-align: center;
+}
+
+.error > small {
+	color: red;
+}
+
+.separator {
+	margin-top: 10px;
+	text-align: center;
+}
+
+.separator > div {
+	display: inline-block;
+}
+
+.bar {
+	background-color: grey;
+	width: 35%;
+	height: 1px;
+	margin-bottom: 1.2%;
+}
+
+/* Estilo de la pagina shop */
+header {
+	display: flex;
+	background: #1E8449;
+	width: 100%;
+	height: 65px;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+}
+
+header > h1 {
+	color: white;
+}
+
+.icons {
+	position: absolute;
+	right: 12px;
+	overflow: hidden;
+}
+
+.icons > ul {
+	display: flex;
+	align-items: center;
+	list-style: none;
+}
+
+.icons > ul > li {
+	display: inline-block;
+	padding: 10px;
+}
+
+.user {
+	display: block;
+	color: white;
+	max-width: 60px;
+}
+
+i {
+	color: white;
+	font-size: 23px;
+	cursor: pointer;
+}
+
+table {
+	border: solid 2px black;
+	text-align: center;
+	border-collapse: collapse;
+	margin-top: 10px;
+}
+
+caption {
+	font-size: 35px;
+	font-weight: 500;
+	padding-bottom: 10px;
+}
+
+th {
+	border: solid 2px;
+}
+
+th > h3 {
+	margin: 4px;
+}
+
+td {
+	border: solid 2px;
+	padding: 15px;
+}
+
+.drop-menu {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	right: 0;
+	width: 8%;
+	background: #1E8449;
+	overflow: hidden;
+	height: 0;
+	transition-property: height;
+  	transition-duration: 1s;
+  	transition-timing-function: ease-in;
+  	margin: auto;
+  	border-bottom-left-radius: 8px;
+}
+
+.logout {
+	border-radius: 8px; 
+	border: none;
+	font-family: monospace;
+	font-size: 14px;
+	padding: 5px;
+	cursor: pointer;
+}
+
+.drop-menu-down {
+	background: #1E8449;
+	border-bottom-left-radius: 8px;
+	height: 5%;
+}
+
+/*Estilo pagina registro*/
+
+.main_register {
+	border: solid 2px grey;
+	border-radius: 4px;
+	box-shadow: 5px 5px 3px 8px rgba(128, 139, 150, 0.4);
+	margin: auto;
+	margin-left: 35%;
+	height: 67%;
+	padding-bottom: 20px;
+	width: 30%;
+}
+
+.loginUrl {
+	text-align: center;
+}
+
+.gender {
+	border-radius: 10px;
+	font-size: 14px;
+}
+
+/*Estilo pagina de error*/
+.error_image {
+	width: 100%;
+	height: 99vh;
+	filter: blur(2px);
+}
+
+.window_message {
+	position: absolute;
+	top: 30%;
+	left: 40%;
+	background: rgba(0, 0, 0, 0.5);
+	width: 20%;
+	height: 32%;
+	border-radius: 10px;
+}
+
+.message {
+	text-align: center;
+}
+
+.message > h1, h3 {
+	padding: 5px;
+	color: white;
+}
+
+.return {
+	border: none;
+	border-radius: 8px;
+	padding: 6px;
+	cursor: pointer;
+}
+
