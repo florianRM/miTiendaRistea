@@ -1,23 +1,14 @@
 package com.jacaranda.control;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import com.jacaranda.users.Users;
 
 public class UsersControl {
 	
-	private static StandardServiceRegistry sr;
-	private static SessionFactory sf;
-	private static Session session;
-	
+	private Session session = ConnectionDB.getSession();
+
 	public UsersControl() {
-		sr = new StandardServiceRegistryBuilder().configure().build();
-		sf = new MetadataSources(sr).buildMetadata().buildSessionFactory();
-		session = sf.openSession();
 	}
 	
 	public boolean checkUser(Users user) {

@@ -7,7 +7,8 @@ const loginButton = document.querySelector('.login');
 const registerButton = document.querySelector('.register');
 
 formulario.addEventListener('input', () => {
-	if((fields[0].value.length === 0 || fields[1].value.length === 0)) {
+	const minLenght = 6;
+	if((fields[0].value.length === 0 || fields[1].value.length < minLenght)) {
 		loginButton.setAttribute('disabled', 'true');
 	} else {
 		loginButton.removeAttribute('disabled');
