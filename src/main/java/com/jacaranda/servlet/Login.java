@@ -52,10 +52,14 @@ public class Login extends HttpServlet {
 			
 			String encriptedPass = DigestUtils.md5Hex(password);
 			Users user = new Users(username, encriptedPass);
-			if(daoUser.checkUser(user) == true) {
-				response.sendRedirect("shop");
-			} else {
-				response.sendRedirect("index.jsp?msg=The user or password is not correct");
+			try {
+				if(daoUser.checkUser(user) == true) {
+					response.sendRedirect("shop");
+				} else {
+					response.sendRedirect("index.jsp?msg=The user or password is not correct");
+				}
+			} catch (Exception e) {
+				response.sendRedirect("error.jsp?msg=" + e.getMessage());
 			}
 		}
 	}

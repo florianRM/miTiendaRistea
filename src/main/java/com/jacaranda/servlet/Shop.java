@@ -14,7 +14,9 @@ import javax.servlet.http.HttpSession;
 
 import com.jacaranda.category.Category;
 import com.jacaranda.control.CategoryControl;
+import com.jacaranda.control.UsersControl;
 import com.jacaranda.item.Item;
+import com.jacaranda.users.Users;
 
 /**
  * Servlet implementation class Shop
@@ -38,6 +40,16 @@ public class Shop extends HttpServlet {
 		HttpSession session = request.getSession();
 		String name = (String) session.getAttribute("username");
 		String login = (String) session.getAttribute("login");
+		UsersControl daoUser = new UsersControl();
+		boolean isAdmin = false;
+		
+		Users user = new Users(name, "");
+		try {
+			isAdmin = daoUser.getUser(user).isAdmin();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		if(login == null && name == null) {
 			response.sendRedirect("error.jsp");
@@ -81,8 +93,11 @@ public class Shop extends HttpServlet {
 					+ "				<th><h3>Id</h3></th>\r\n"
 					+ "				<th><h3>Name</h3></th>\r\n"
 					+ "				<th><h3>Description</h3></th>\r\n"
-					+ "				<th><h3>Price</h3></th>\r\n"
-					+ "			</tr>\r\n"
+					+ "				<th><h3>Price</h3></th>\r\n");
+					if(isAdmin) {
+						out.append("<th><h3>Add Item</h3></th>");
+					}
+					out.append("</tr>\r\n"
 					+ "		</thead>\r\n"
 					+ "		<tbody>\r\n");
 			
@@ -94,8 +109,11 @@ public class Shop extends HttpServlet {
 							+ "		<td>" + item.getId() +"</td>\r\n"
 							+ "		<td>" + item.getName() +"</td>\r\n"
 							+ "		<td>" + item.getDescription() +"</td>\r\n"
-							+ "		<td>" + item.getPrice() +"</td>\r\n"
-							+ "	</tr>");
+							+ "		<td>" + item.getPrice() +"</td>\r\n");
+					if(isAdmin) {
+						out.append("<td><button class=\"addItem\">Add Item</button></td>");
+					}
+					out.append("</tr>");
 				}
 			}
 			
