@@ -43,6 +43,9 @@ CREATE TABLE CarritoCompra.Bought
     CONSTRAINT FK_Bought_Username FOREIGN KEY (username) REFERENCES CarritoCompra.Users(username)
 );
 
+-- Insertamos un usuario administrador
+insert into CarritoCompra.Users values ('florian', '56910c52ed70539e3ce0391edeb6d339', 'Florian', 'Ristea', '2001-10-30', 'M', 1);
+
 -- Insertamos las categorias
 insert into CarritoCompra.Category (id, name, description) values ('Cyperaceae', 'Havana Nutrush', 'Scleria havanensis Britton');
 insert into CarritoCompra.Category (id, name, description) values ('Ericaceae', 'Kalmiopsis', 'Kalmiopsis Rehder');
