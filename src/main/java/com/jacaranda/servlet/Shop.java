@@ -73,8 +73,11 @@ public class Shop extends HttpServlet {
 			out.append("<header>\r\n"
 					+ "		<h1>BotanicaLandia</h1>\r\n"
 					+ "		<div class=\"icons\">\r\n"
-					+ "			<ul>\r\n"
-					+ "				<li><a><i class=\"fa-solid fa-cart-shopping\"></i></a></li>\r\n"
+					+ "			<ul>\r\n");
+			if(isAdmin) {
+				out.append("<li><a href=\"addItem.jsp\"><button class=\"addItem\">Add Item</button></a></li>\r\n");
+			}
+			out.append("			<li><a><i class=\"fa-solid fa-cart-shopping\"></i></a></li>\r\n"
 					+ "				<li><i class=\"fa-solid fa-user\"></i></li>\r\n"
 					+ "				<li class=\"user\"><strong>Welcome</strong><br>" + name + "</li>\r\n"
 					+ "			</ul>\r\n"
@@ -93,11 +96,8 @@ public class Shop extends HttpServlet {
 					+ "				<th><h3>Id</h3></th>\r\n"
 					+ "				<th><h3>Name</h3></th>\r\n"
 					+ "				<th><h3>Description</h3></th>\r\n"
-					+ "				<th><h3>Price</h3></th>\r\n");
-					if(isAdmin) {
-						out.append("<th><h3>Add Item</h3></th>");
-					}
-					out.append("</tr>\r\n"
+					+ "				<th><h3>Price</h3></th>\r\n"
+					+ "			</tr>\r\n"
 					+ "		</thead>\r\n"
 					+ "		<tbody>\r\n");
 			
@@ -109,11 +109,8 @@ public class Shop extends HttpServlet {
 							+ "		<td>" + item.getId() +"</td>\r\n"
 							+ "		<td>" + item.getName() +"</td>\r\n"
 							+ "		<td>" + item.getDescription() +"</td>\r\n"
-							+ "		<td>" + item.getPrice() +"</td>\r\n");
-					if(isAdmin) {
-						out.append("<td><button class=\"addItem\">Add Item</button></td>");
-					}
-					out.append("</tr>");
+							+ "		<td>" + item.getPrice() +"</td>\r\n"
+							+ "</tr>");
 				}
 			}
 			
