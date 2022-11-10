@@ -37,10 +37,35 @@ List<Category> categoryList = daoCategory.getCategories();
 		<h1 class="title">Add Item</h1>
 		<form action="addItem" method="post" enctype="multipart/form-data">
 			<div class="formField">
-				<label for="uploadFile">Image</label> <input type="file"
-					name="uploadFile" class="uploadFile" required>
+				<label for="id">Id</label> 
+				<input type="text" name="id" class="id" required>
 			</div>
-			
+			<div class="formField">
+				<label for="name">Name</label> 
+				<input type="text" name="name" class="name" required>
+			</div>
+			<div class="formField">
+				<label for="uploadFile">Description</label><br> 
+				<textarea rows="5" cols="26" name="description" class="description" required></textarea>
+			</div>
+			<div class="formField">
+				<label for="price">Price</label> 
+				<input type="number" name="price" class="price" step="0.01" required>
+			</div>
+			<div class="formField">
+				<label for="price">Price</label> 
+				<select name="category" class="category" required>
+					<%
+						for(Category aux : categoryList) {
+							out.append("<option value=" + aux.getId() + ">" + aux.getName() + "</option>");
+						}
+					%>
+				</select>
+			</div>
+			<div class="formField">
+				<label for="uploadFile">Image</label> 
+				<input type="file" name="uploadFile" class="uploadFile" required>
+			</div>
 			<div class="buttons">
 				<button type="submit" class="register">Add Item</button>
 			</div>
