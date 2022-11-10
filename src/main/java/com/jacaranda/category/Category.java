@@ -26,6 +26,10 @@ public class Category {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public Category(String id) {
+		this.id = id;
+	}
+	
 	public Category(String id, String name, String description) {
 		super();
 		this.id = id;
