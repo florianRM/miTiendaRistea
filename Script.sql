@@ -19,6 +19,8 @@ CREATE TABLE CarritoCompra.Item
     CONSTRAINT FK_Item FOREIGN KEY (category_id) REFERENCES CarritoCompra.Category(id)
 );
 
+ALTER TABLE CarritoCompra.Item ADD imgUrl varchar(50)
+
 CREATE TABLE CarritoCompra.Users 
 (
 	username VARCHAR(50),

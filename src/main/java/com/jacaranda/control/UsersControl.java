@@ -6,20 +6,16 @@ import com.jacaranda.users.Users;
 
 public class UsersControl {
 	
-	private Session session = ConnectionDB.getSession();
-
-	public UsersControl() {
+	public UsersControl() throws Exception {
+		comprobationSession();
 	}
 	
 	public boolean checkUser(Users user) throws Exception {
+		Session session = comprobationSession();
 		boolean exist = false;
 		Users aux = null;
 		
-		try {
-			 aux = session.get(Users.class, user.getUsername());
-		} catch (Exception e) {
-			throw new Exception("Connection error. Contact an administrator");
-		}
+		aux = session.get(Users.class, user.getUsername());
 		
 		if((aux != null) && (aux.getUsername().equals(user.getUsername()) && aux.getPassword().equals(user.getPassword()))) {
 			exist = true;
@@ -29,6 +25,8 @@ public class UsersControl {
 	}
 	
 	public void registerUser(Users user) throws Exception {
+		Session session = comprobationSession();
+		
 		try {
 			session.getTransaction().begin();
 			session.save(user);
@@ -39,14 +37,22 @@ public class UsersControl {
 	}
 	
 	public Users getUser(Users user) throws Exception {
+		Session session = comprobationSession();
 		Users aux = null;
 		
-		try {
-			aux = session.get(Users.class, user.getUsername());
-		} catch (Exception e) {
-			throw new Exception("Connection error. Contact an administrator");
-		}
+		aux = session.get(Users.class, user.getUsername());
 		
 		return aux;
+	}
+	
+	private Session comprobationSession() throws Exception {
+		Session session = null;
+		try {
+			session = ConnectionDB.getSession();
+		} catch (Exception e) {
+			throw new Exception("Error establishing a database connection. Please contact an administrator");
+		}
+		
+		return session;
 	}
 }

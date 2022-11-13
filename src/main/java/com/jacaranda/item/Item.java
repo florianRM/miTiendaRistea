@@ -18,6 +18,7 @@ public class Item {
 	private double price;
 	@ManyToOne
 	private Category category;
+	private String imgUrl;
 	
 	public Item() {
 		super();
@@ -29,13 +30,14 @@ public class Item {
 		this.id = id;
 	}
 
-	public Item(String id, String name, String description, double price, Category category) {
+	public Item(String id, String name, String description, double price, Category category, String imgUrl) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.category = category;
+		this.imgUrl = imgUrl;
 	}
 
 	public String getName() {
@@ -74,6 +76,22 @@ public class Item {
 		return id;
 	}
 	
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+
 	@Override
 	public String toString() {
 		return "Item [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price

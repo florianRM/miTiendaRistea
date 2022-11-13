@@ -4,8 +4,12 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<meta http-equiv="Expires" content="0">
+ <meta http-equiv="Last-Modified" content="0">
+ <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+ <meta http-equiv="Pragma" content="no-cache">
 <title>BotanicaLandia</title>
-<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
 <%
 	session.invalidate();

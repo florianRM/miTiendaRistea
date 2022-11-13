@@ -9,9 +9,10 @@
 </head>
 <%
 	String msg = request.getParameter("msg");
+	String errorId = request.getParameter("errorId");
 %>
 <body>
-	<%if(msg == null) {%>
+	<%if(errorId.equals("0002")) {%>
 		<img alt="403 error" src="./img/403-error.jpg" class="error_image">
 		<div class="window_message">
 			<div class="message">
@@ -20,14 +21,14 @@
 				<a href="index.jsp"><button class="return">Return log in</button></a>
 			</div>
 		</div>
-	<%} else {%>
+	<%} else if(errorId.equals("0001")) {%>
 		<div class="window_message">
 			<div class="message">
-				<h1>Error 403</h1>
+				<h1>Error 500</h1>
 				<h3><%=msg %></h3>
-				<a href="shop"><button class="return">Return shop</button></a>
+				<a href="index.jsp"><button class="return">Return log in</button></a>
 			</div>
 		</div>
-	<%} %>
+	<%}%>
 </body>
 </html>

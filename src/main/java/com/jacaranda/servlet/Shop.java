@@ -40,7 +40,13 @@ public class Shop extends HttpServlet {
 		HttpSession session = request.getSession();
 		String name = (String) session.getAttribute("username");
 		String login = (String) session.getAttribute("login");
-		UsersControl daoUser = new UsersControl();
+		UsersControl daoUser = null;
+		try {
+			daoUser = new UsersControl();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		boolean isAdmin = false;
 		
 		Users user = new Users(name, "");
@@ -52,7 +58,7 @@ public class Shop extends HttpServlet {
 		}
 		
 		if(login == null && name == null) {
-			response.sendRedirect("error.jsp");
+			response.sendRedirect("error.jsp?errorId=0002");
 		} else {
 			CategoryControl daoCategory = new CategoryControl();
 			List<Category> categoryList = daoCategory.getCategories();
@@ -87,36 +93,33 @@ public class Shop extends HttpServlet {
 					+ "   <button class=\"logout\">Log out</button>"
 					+ "</div>");
 			
-			//Creamos la tabla donde se listara todo
-			out.append("<table align=\"center\">\r\n"
-					+ "     <caption>Our plants</caption>"
-					+ "		<thead>\r\n"
-					+ "			<tr>\r\n"
-					+ "				<th><h3>Category</h3></th>\r\n"
-					+ "				<th><h3>Id</h3></th>\r\n"
-					+ "				<th><h3>Name</h3></th>\r\n"
-					+ "				<th><h3>Description</h3></th>\r\n"
-					+ "				<th><h3>Price</h3></th>\r\n"
-					+ "			</tr>\r\n"
-					+ "		</thead>\r\n"
-					+ "		<tbody>\r\n");
-			
 			//Recorremos la lista de items y las vamos escribiendo en el html
+			out.append("<div class=\"grid-container\">");
 			for(Category category : categoryList) {
 				for(Item item : category.getItems()) {
-					out.append("<tr>\r\n"
-							+ "		<td>" + category.getName() +"</td>\r\n"
-							+ "		<td>" + item.getId() +"</td>\r\n"
-							+ "		<td>" + item.getName() +"</td>\r\n"
-							+ "		<td>" + item.getDescription() +"</td>\r\n"
-							+ "		<td>" + item.getPrice() +"</td>\r\n"
-							+ "</tr>");
+					out.append("<div class=\"grid-item\">\r\n"
+							+ "		<div class=\"item-title\">\r\n"
+							+ "			<h3>" + item.getName() + "</h3>\r\n"
+							+ "		</div>\r\n"
+							+ "		<div class=\"item-info\">\r\n"
+							+ "			<ul>\r\n"
+							+ "				<li>Id: " + item.getId() + "</li>\r\n"
+							+ "				<li>Description: " + item.getDescription() + "</li>\r\n"
+							+ "				<li>Price: " + item.getPrice() + "</li>\r\n"
+							+ "			</ul>\r\n"
+							+ "		</div>\r\n"
+							+ "		<div class=\"item-img\">\r\n");
+							if(item.getImgUrl() != null) {
+								out.append("<img alt=\"\" src=\"./uploadedImages/" + item.getImgUrl() + "\">");
+							} else {
+								out.append("<p>No photo yet</p>\r\n");
+							}
+							out.append("</div>\r\n"
+							+ "		</div>\r\n");
 				}
 			}
-			
 			//Por último cerramos la tabla y el html
-			out.append("</tbody>\r\n"
-					+ "	</table>\r\n"
+			out.append("</div>"
 					+ "</body>\r\n"
 					+ "<script type=\"text/javascript\" src=\"./js/dropMenu.js\"></script>"
 					+ "</html>");

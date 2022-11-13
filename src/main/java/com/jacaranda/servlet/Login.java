@@ -34,7 +34,7 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("error.jsp");
+		response.sendRedirect("error.jsp?errorId=0002");
 	}
 
 	/**
@@ -45,22 +45,27 @@ public class Login extends HttpServlet {
 		String password = request.getParameter("password");
 		HttpSession session = request.getSession();
 		
+		session.setAttribute("username", username);
+		session.setAttribute("login", "true");
+		
 		if(username != null && password != null) {
-			UsersControl daoUser = new UsersControl();
-			session.setAttribute("username", username);
-			session.setAttribute("login", "true");
-			
-			String encriptedPass = DigestUtils.md5Hex(password);
-			Users user = new Users(username, encriptedPass);
+			UsersControl daoUser = null;
 			try {
+				daoUser = new UsersControl();
+				
+				String encriptedPass = DigestUtils.md5Hex(password);
+				Users user = new Users(username, encriptedPass);
+				
 				if(daoUser.checkUser(user) == true) {
+					System.out.println("dentro");
 					response.sendRedirect("shop");
 				} else {
 					response.sendRedirect("index.jsp?msg=The user or password is not correct");
 				}
 			} catch (Exception e) {
-				response.sendRedirect("error.jsp?msg=" + e.getMessage());
+				response.sendRedirect("error.jsp?errorId=0001&msg=" + e.getMessage());
 			}
+			
 		}
 	}
 

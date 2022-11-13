@@ -12,9 +12,13 @@ public class ConnectionDB {
 	private static Session session;
 	
 	static {
-		sr = new StandardServiceRegistryBuilder().configure().build();
-		sf = new MetadataSources(sr).buildMetadata().buildSessionFactory();
-		session = sf.openSession();
+		try {
+			sr = new StandardServiceRegistryBuilder().configure().build();
+			sf = new MetadataSources(sr).buildMetadata().buildSessionFactory();
+			session = sf.openSession();
+		} catch (Exception e) {
+			throw new Error();
+		}
 	}
 	
 	public static Session getSession() {

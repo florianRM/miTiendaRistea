@@ -11,12 +11,21 @@ public class ItemControl {
 	}
 	
 	public void addItem(Item item) throws Exception {
-		try {
+		/*try {
 			session.getTransaction().begin();
 			session.save(item);
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			throw new Exception("Id exist");
+		}*/
+		Item aux = session.get(Item.class, item.getId());
+		
+		if(aux != null) {
+			throw new Exception("Id exist");
 		}
+		
+		session.getTransaction().begin();
+		session.save(item);
+		session.getTransaction().commit();
 	}
 }
