@@ -15,11 +15,10 @@ CREATE TABLE CarritoCompra.Item
     description VARCHAR(300),
     price DECIMAL(5, 2),
     category_id VARCHAR(30),
+    img longblob,
     CONSTRAINT PK_Item PRIMARY KEY(id, name),
     CONSTRAINT FK_Item FOREIGN KEY (category_id) REFERENCES CarritoCompra.Category(id)
 );
-
-ALTER TABLE CarritoCompra.Item ADD imgUrl varchar(50)
 
 CREATE TABLE CarritoCompra.Users 
 (

@@ -23,9 +23,8 @@ import com.jacaranda.item.Item;
  * Servlet implementation class AddItem
  */
 @WebServlet("/addItem")
-@MultipartConfig(fileSizeThreshold=1024*1024*10, 
-					maxFileSize=1024*1024*50,
-					maxRequestSize=1024*1024*100)
+@MultipartConfig(maxFileSize=1024*1024*50,
+				maxRequestSize=1024*1024*100)
 public class AddItem extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -63,7 +62,7 @@ public class AddItem extends HttpServlet {
 			ItemControl.addItem(item);
 			response.sendRedirect("addItem.jsp");
 		} catch (Exception e) {
-			response.sendRedirect("error.jsp");
+			response.sendRedirect("addItem.jsp?msg=" + e.getMessage());
 		}
 	}
 
