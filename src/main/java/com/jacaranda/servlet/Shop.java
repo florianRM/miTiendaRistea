@@ -1,9 +1,7 @@
 package com.jacaranda.servlet;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -41,28 +39,13 @@ public class Shop extends HttpServlet {
 		HttpSession session = request.getSession();
 		String name = (String) session.getAttribute("username");
 		String login = (String) session.getAttribute("login");
-		UsersControl daoUser = null;
-		try {
-			daoUser = new UsersControl();
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		boolean isAdmin = false;
-		
-		Users user = new Users(name, "");
-		try {
-			isAdmin = daoUser.getUser(user).isAdmin();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		if(login == null && name == null) {
 			response.sendRedirect("error.jsp?errorId=0002");
 		} else {
-			CategoryControl daoCategory = new CategoryControl();
-			List<Category> categoryList = daoCategory.getCategories();
+			Users user = new Users(name, "");
+			boolean isAdmin = UsersControl.getUser(user).isAdmin();
+			List<Category> categoryList = CategoryControl.getCategories();
 			
 			PrintWriter out = response.getWriter();
 			//Empezamos escribiendo la estructura del html
@@ -110,8 +93,8 @@ public class Shop extends HttpServlet {
 							+ "			</ul>\r\n"
 							+ "		</div>\r\n"
 							+ "		<div class=\"item-img\">\r\n");
-							if(item.getImgUrl() != null) {
-								out.append("<img alt=\"\" src=\"./uploadedImages/" + item.getImgUrl() + "\">");
+							if(item.getImg() != null) {
+								out.append("<img alt=\"\" src=\"./DownloadImage?id=" + item.getId() + "\">");
 							} else {
 								out.append("<p>No photo yet</p>\r\n");
 							}

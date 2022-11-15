@@ -11,7 +11,7 @@ public class CategoryControl {
 	public CategoryControl() {
 	}
 	
-	public List<Category> getCategories() {
+	public static List<Category> getCategories() {
 		@SuppressWarnings("unchecked")
 		Query<Category> query = ConnectionDB.getSession().createQuery("SELECT c FROM Category c");
 		return query.getResultList();

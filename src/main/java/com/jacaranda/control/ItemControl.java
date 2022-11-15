@@ -6,19 +6,12 @@ import com.jacaranda.item.Item;
 
 public class ItemControl {
 	
-	Session session = ConnectionDB.getSession();
+	private static Session session = ConnectionDB.getSession();
 
 	public ItemControl() {
 	}
 	
-	public void addItem(Item item) throws Exception {
-		/*try {
-			session.getTransaction().begin();
-			session.save(item);
-			session.getTransaction().commit();
-		} catch (Exception e) {
-			throw new Exception("Id exist");
-		}*/
+	public static void addItem(Item item) throws Exception {
 		Item aux = session.get(Item.class, item.getId());
 		
 		if(aux != null) {
@@ -28,5 +21,9 @@ public class ItemControl {
 		session.getTransaction().begin();
 		session.save(item);
 		session.getTransaction().commit();
+	}
+	
+	public static Item getItem(String id) {
+		return session.get(Item.class, id);
 	}
 }

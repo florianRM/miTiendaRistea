@@ -84,11 +84,11 @@ public class Item {
 		this.category = category;
 	}
 
-	public Blob getImgUrl() {
+	public Blob getImg() {
 		return img;
 	}
 
-	public void setImgUrl(Blob img) {
+	public void setImg(Blob img) {
 		this.img = img;
 	}
 

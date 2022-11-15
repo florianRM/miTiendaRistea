@@ -12,7 +12,18 @@
 	String errorId = request.getParameter("errorId");
 %>
 <body>
-	<%if(errorId.equals("0002")) {%>
+	<%
+	switch(errorId) {
+	case "0001":%>
+		<div class="window_message">
+			<div class="message">
+				<h1>Error 500</h1>
+				<h3><%=msg %></h3>
+				<a href="index.jsp"><button class="return">Return log in</button></a>
+			</div>
+		</div>
+		<%break;
+	case "0002":%>
 		<img alt="403 error" src="./img/403-error.jpg" class="error_image">
 		<div class="window_message">
 			<div class="message">
@@ -21,7 +32,8 @@
 				<a href="index.jsp"><button class="return">Return log in</button></a>
 			</div>
 		</div>
-	<%} else if(errorId.equals("0001")) {%>
+		<%break;
+	case "0003":%>
 		<div class="window_message">
 			<div class="message">
 				<h1>Error 500</h1>
@@ -29,14 +41,16 @@
 				<a href="index.jsp"><button class="return">Return log in</button></a>
 			</div>
 		</div>
-	<%} else if(errorId.equals("0003")) {%>
+		<%break;
+	default:%>
 		<div class="window_message">
 			<div class="message">
 				<h1>Error 500</h1>
-				<h3><%=msg %></h3>
+				<h3>Oops an unexpected error has occurred.</h3>
 				<a href="index.jsp"><button class="return">Return log in</button></a>
 			</div>
 		</div>
-	<%}%>
+		<%break;
+	}%>
 </body>
 </html>

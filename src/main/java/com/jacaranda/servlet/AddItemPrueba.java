@@ -3,7 +3,6 @@ package com.jacaranda.servlet;
 import java.io.File;
 import java.io.IOException;
 
-import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +19,7 @@ import com.jacaranda.item.Item;
 /**
  * Servlet implementation class AddItem
  */
-@WebServlet("/addItem")
+@WebServlet("/AddItem")
 //Indicamos el tamaño de los archivos permitidos
 @MultipartConfig(fileSizeThreshold=1024*1024*10, 
 					maxFileSize=1024*1024*50,
@@ -73,16 +72,16 @@ public class AddItemPrueba extends HttpServlet {
 		     String nameImage = username + part.getSubmittedFileName();
 		     ItemControl daoItem = new ItemControl();
 		     
-		     /*Category aux = new Category(category);
-		     Item item = new Item(id, name, description, price, aux, nameImage);
+		     Category aux = new Category(category);
+		     //Item item = new Item(id, name, description, price, aux, nameImage);
 		     
 		     try {
-				daoItem.addItem(item);
+				//daoItem.addItem(item);
 				response.sendRedirect("addItem.jsp");
 			} catch (Exception e) {
 				response.sendRedirect("error.jsp?errorId=0001&msg=" + e.getMessage());
 			}
-		    */
+		    
 		    //Introducimos la foto en la ruta creada anteriormente y su nombre
 		    part.write(uploadFilePath + File.separator + nameImage);
 		}

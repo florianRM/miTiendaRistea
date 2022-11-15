@@ -1,3 +1,4 @@
+<%@page import="com.jacaranda.control.CategoryControl"%>
 <%@page import="com.jacaranda.category.Category"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -15,7 +16,7 @@
 <%
 String name = (String) session.getAttribute("username");
 String login = (String) session.getAttribute("login");
-List<Category> categoryList = daoCategory.getCategories();
+List<Category> categoryList = CategoryControl.getCategories();
 %>
 <body>
 	<header>

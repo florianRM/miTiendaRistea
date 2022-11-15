@@ -1,17 +1,17 @@
 package com.jacaranda.control;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import com.jacaranda.users.Users;
 
 public class UsersControl {
 	
-	public UsersControl() throws Exception {
+	private static Session session = ConnectionDB.getSession();
+	
+	public UsersControl() {
 	}
 	
-	public boolean checkUser(Users user) throws Exception {
-		Session session = comprobationSession();
+	public static boolean checkUser(Users user) {
 		boolean exist = false;
 		Users aux = null;
 		
@@ -24,8 +24,7 @@ public class UsersControl {
 		return exist;
 	}
 	
-	public void registerUser(Users user) throws Exception {
-		Session session = comprobationSession();
+	public static void registerUser(Users user) throws Exception {
 		try {
 			session.getTransaction().begin();
 			session.save(user);
@@ -35,8 +34,7 @@ public class UsersControl {
 		}
 	}
 	
-	public Users getUser(Users user) throws Exception {
-		Session session = comprobationSession();
+	public static Users getUser(Users user) {
 		Users aux = null;
 		
 		aux = session.get(Users.class, user.getUsername());
@@ -44,13 +42,4 @@ public class UsersControl {
 		return aux;
 	}
 	
-	private Session comprobationSession() throws Exception {
-		Session session = null;
-		try {
-			session = ConnectionDB.getSession();
-		} catch (HibernateException e) {
-			throw new Exception(e.getMessage());
-		}
-		return session;
-	}
 }

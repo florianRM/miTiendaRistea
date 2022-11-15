@@ -1,3 +1,6 @@
+<%@page import="com.jacaranda.control.UsersControl"%>
+<%@page import="java.time.LocalTime"%>
+<%@page import="java.time.LocalDateTime"%>
 <%@page import="org.hibernate.tool.hbm2ddl.UniqueConstraintSchemaUpdateStrategy"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="org.apache.commons.codec.digest.DigestUtils"%>
@@ -23,19 +26,16 @@
 
 	if (username != null && password != null && name != null && lastname != null && birth != null
 			&& gender != null) {
-		char genderChar = gender.charAt(0);
-		/*Le sumamos un dia a la fecha ya que a la base de datos 
-		se introduce con un dia menos*/
-		DateTimeFormatter format =  DateTimeFormatter.ofPattern("yyyy-M-d");
 		
-		LocalDate newDate = LocalDate.parse(birth, format).plusDays(1);
+		char genderChar = gender.charAt(0);
+		LocalDate newDate = LocalDate.parse(birth);
 		
 		String encriptedPassword = DigestUtils.md5Hex(password);
 		
 		Users user = new Users(username, encriptedPassword, name, lastname, newDate, genderChar, false);
 		
 		try {
-			daoUsers.registerUser(user);
+			UsersControl.registerUser(user);
 			response.sendRedirect("index.jsp");
 		} catch(Exception e) {
 			response.sendRedirect("register.jsp?msg=" + e.getMessage());

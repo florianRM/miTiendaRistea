@@ -1,7 +1,6 @@
 package com.jacaranda.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.jasper.tagplugins.jstl.core.Out;
 
 import com.jacaranda.control.UsersControl;
 import com.jacaranda.users.Users;
@@ -31,13 +29,6 @@ public class Login extends HttpServlet {
     }
     
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("error.jsp?errorId=0002");
-	}
-
-	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,15 +40,11 @@ public class Login extends HttpServlet {
 		session.setAttribute("login", "true");
 		
 		if(username != null && password != null) {
-			UsersControl daoUser = null;
 			try {
-				daoUser = new UsersControl();
-				
 				String encriptedPass = DigestUtils.md5Hex(password);
 				Users user = new Users(username, encriptedPass);
 				
-				if(daoUser.checkUser(user) == true) {
-					System.out.println("dentro");
+				if(UsersControl.checkUser(user) == true) {
 					response.sendRedirect("shop");
 				} else {
 					response.sendRedirect("index.jsp?msg=The user or password is not correct");
@@ -66,6 +53,8 @@ public class Login extends HttpServlet {
 				response.sendRedirect("error.jsp?errorId=0001&msg=" + e.getMessage());
 			}
 			
+		} else {
+			response.sendRedirect("error.jsp?errorId=0003&message=Parameters cannot be null");
 		}
 	}
 
