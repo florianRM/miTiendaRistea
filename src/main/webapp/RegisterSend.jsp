@@ -24,15 +24,11 @@
 	if (username != null && password != null && name != null && lastname != null && birth != null
 			&& gender != null) {
 		char genderChar = gender.charAt(0);
-		
-		//Parseamos la fecha recibida
-		LocalDate date = LocalDate.parse(birth);
-		
-		/*Creamos una cadena sumandole 1 al dia ya que al introducirlo 
-		a la base de datos se introduce con un dia menos*/
+		/*Le sumamos un dia a la fecha ya que a la base de datos 
+		se introduce con un dia menos*/
 		DateTimeFormatter format =  DateTimeFormatter.ofPattern("yyyy-M-d");
-		String dateString = date.getYear() + "-" + date.getMonthValue() + "-" + (date.getDayOfMonth() + 1);
-		LocalDate newDate = LocalDate.parse(dateString, format);
+		
+		LocalDate newDate = LocalDate.parse(birth, format).plusDays(1);
 		
 		String encriptedPassword = DigestUtils.md5Hex(password);
 		
@@ -44,6 +40,8 @@
 		} catch(Exception e) {
 			response.sendRedirect("register.jsp?msg=" + e.getMessage());
 		}
+	} else {
+		response.sendRedirect("error.jsp?errorId=0003&message=Parameters cannot be null");
 	}
 	%>
 </body>

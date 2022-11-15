@@ -29,6 +29,14 @@
 				<a href="index.jsp"><button class="return">Return log in</button></a>
 			</div>
 		</div>
+	<%} else if(errorId.equals("0003")) {%>
+		<div class="window_message">
+			<div class="message">
+				<h1>Error 500</h1>
+				<h3><%=msg %></h3>
+				<a href="index.jsp"><button class="return">Return log in</button></a>
+			</div>
+		</div>
 	<%}%>
 </body>
 </html>

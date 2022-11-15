@@ -5,7 +5,8 @@ import org.hibernate.Session;
 import com.jacaranda.item.Item;
 
 public class ItemControl {
-	private Session session = ConnectionDB.getSession();
+	
+	Session session = ConnectionDB.getSession();
 
 	public ItemControl() {
 	}

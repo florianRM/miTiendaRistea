@@ -1,5 +1,6 @@
 package com.jacaranda.control;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import com.jacaranda.users.Users;
@@ -7,7 +8,6 @@ import com.jacaranda.users.Users;
 public class UsersControl {
 	
 	public UsersControl() throws Exception {
-		comprobationSession();
 	}
 	
 	public boolean checkUser(Users user) throws Exception {
@@ -26,7 +26,6 @@ public class UsersControl {
 	
 	public void registerUser(Users user) throws Exception {
 		Session session = comprobationSession();
-		
 		try {
 			session.getTransaction().begin();
 			session.save(user);
@@ -49,10 +48,9 @@ public class UsersControl {
 		Session session = null;
 		try {
 			session = ConnectionDB.getSession();
-		} catch (Exception e) {
-			throw new Exception("Error establishing a database connection. Please contact an administrator");
+		} catch (HibernateException e) {
+			throw new Exception(e.getMessage());
 		}
-		
 		return session;
 	}
 }

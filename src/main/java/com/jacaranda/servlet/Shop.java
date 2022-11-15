@@ -1,5 +1,6 @@
 package com.jacaranda.servlet;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
@@ -89,8 +90,8 @@ public class Shop extends HttpServlet {
 					+ "			</ul>\r\n"
 					+ "		</div>\r\n"
 					+ "	</header>"
-					+ " <div class=\"drop-menu\">"
-					+ "   <button class=\"logout\">Log out</button>"
+					+ " <div class=\"drop-menu\">\r\n"
+					+ "   <button class=\"logout\">Log out</button>\r\n"
 					+ "</div>");
 			
 			//Recorremos la lista de items y las vamos escribiendo en el html
@@ -119,19 +120,10 @@ public class Shop extends HttpServlet {
 				}
 			}
 			//Por último cerramos la tabla y el html
-			out.append("</div>"
+			out.append("</div>\r\n"
 					+ "</body>\r\n"
 					+ "<script type=\"text/javascript\" src=\"./js/dropMenu.js\"></script>"
 					+ "</html>");
 		}
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }

@@ -1,5 +1,6 @@
 package com.jacaranda.item;
 
+import java.sql.Blob;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -18,7 +19,7 @@ public class Item {
 	private double price;
 	@ManyToOne
 	private Category category;
-	private String imgUrl;
+	private Blob img;
 	
 	public Item() {
 		super();
@@ -30,14 +31,13 @@ public class Item {
 		this.id = id;
 	}
 
-	public Item(String id, String name, String description, double price, Category category, String imgUrl) {
+	public Item(String id, String name, String description, double price, Category category) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.category = category;
-		this.imgUrl = imgUrl;
 	}
 
 	public String getName() {
@@ -84,12 +84,12 @@ public class Item {
 		this.category = category;
 	}
 
-	public String getImgUrl() {
-		return imgUrl;
+	public Blob getImgUrl() {
+		return img;
 	}
 
-	public void setImgUrl(String imgUrl) {
-		this.imgUrl = imgUrl;
+	public void setImgUrl(Blob img) {
+		this.img = img;
 	}
 
 	@Override

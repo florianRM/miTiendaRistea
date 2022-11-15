@@ -1,9 +1,9 @@
 package com.jacaranda.servlet;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.sql.PreparedStatement;
 
-import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -13,24 +13,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import org.hibernate.query.Query;
+
 import com.jacaranda.category.Category;
-import com.jacaranda.control.ItemControl;
+import com.jacaranda.control.ConnectionDB;
 import com.jacaranda.item.Item;
 
 /**
  * Servlet implementation class AddItem
  */
-@WebServlet("/addItem")
-//Indicamos el tamaño de los archivos permitidos
+@WebServlet("/AddItem")
 @MultipartConfig(fileSizeThreshold=1024*1024*10, 
 					maxFileSize=1024*1024*50,
-					maxRequestSize=1024*1024*100) 
+					maxRequestSize=1024*1024*100)
 public class AddItem extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	private static final String uploadDir = "src\\main\\webapp\\uploadedImages";
-	
-	//Ruta relativa del directorio donde se guardaran los archivos
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -59,37 +56,22 @@ public class AddItem extends HttpServlet {
 		String description = request.getParameter("description");
 		Double price = Double.parseDouble(request.getParameter("price"));
 		String category = request.getParameter("category");
+		
 		//Conseguimos la foto del formulario mediante el objeto part
 	    Part part = request.getPart("uploadFile");
-		
-		if(id != null && name != null && price != null && category != null) {
-			
-			//Cogemos la ruta absoluta
-			String filePath = getServletContext().getRealPath("");
-			//Buscamos la posición del punto
-			int position = filePath.indexOf(".");
-			//Cortamos la ruta absoluta hasta la posición del punto y le añadimos la nuestra
-			String uploadFilePath = filePath.substring(0, position) + request.getContextPath() + File.separator + uploadDir;
-			 //Convertimos la ruta en un fichero y si no existe lo creamos
-			 File fileSaveDir = new File(uploadFilePath);
-		     if (!fileSaveDir.exists()) {
-		    	 fileSaveDir.mkdirs();
-		     }
-		     String nameImage = username + part.getSubmittedFileName();
-		     ItemControl daoItem = new ItemControl();
-		     
-		     Category aux = new Category(category);
-		     Item item = new Item(id, name, description, price, aux, nameImage);
-		     
-		     try {
-				daoItem.addItem(item);
-				response.sendRedirect("addItem.jsp");
-			} catch (Exception e) {
-				response.sendRedirect("error.jsp?msg=" + e.getMessage());
-			}
-		    
-		    //Introducimos la foto en la ruta creada anteriormente y su nombre
-		    part.write(uploadFilePath + File.separator + nameImage);
-		}
+	    
+	    InputStream fileContent = part.getInputStream();
+	    
+	    Category aux = new Category(category);
+	     Item item = new Item(id, name, description, price, aux);
+	     
+	    /* try {
+			daoItem.addItem(item);
+			Query uploadQuery = ConnectionDB.getSession().createQuery("insert into Item (img) values (fileContent)");
+			response.sendRedirect("addItem.jsp");
+		} catch (Exception e) {
+			response.sendRedirect("error.jsp?errorId=0001&msg=" + e.getMessage());
+		} */
 	}
+
 }

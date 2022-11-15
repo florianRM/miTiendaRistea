@@ -8,17 +8,14 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 public class ConnectionDB {
 	private static StandardServiceRegistry sr;
-	private static SessionFactory sf;
-	private static Session session;
+	private static SessionFactory sf = null;
+	private static Session session = null;
 	
 	static {
-		try {
-			sr = new StandardServiceRegistryBuilder().configure().build();
-			sf = new MetadataSources(sr).buildMetadata().buildSessionFactory();
-			session = sf.openSession();
-		} catch (Exception e) {
-			throw new Error();
-		}
+		sr = new StandardServiceRegistryBuilder().configure().build();
+		sf = new MetadataSources(sr).buildMetadata().buildSessionFactory();
+		session = sf.openSession();
+
 	}
 	
 	public static Session getSession() {
