@@ -43,9 +43,11 @@ public class Shop extends HttpServlet {
 		if(login == null && name == null) {
 			response.sendRedirect("error.jsp?errorId=0002");
 		} else {
+			CategoryControl daoCategory = new CategoryControl();
+			UsersControl daoUser = new UsersControl();
 			Users user = new Users(name, "");
-			boolean isAdmin = UsersControl.getUser(user).isAdmin();
-			List<Category> categoryList = CategoryControl.getCategories();
+			boolean isAdmin = daoUser.getUser(user).isAdmin();
+			List<Category> categoryList = daoCategory.getCategories();
 			
 			PrintWriter out = response.getWriter();
 			//Empezamos escribiendo la estructura del html

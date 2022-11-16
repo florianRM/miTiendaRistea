@@ -32,10 +32,11 @@ public class DownloadImage extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ItemControl daoItem = new ItemControl();
 		//Recuperamos el id del item que llama al servlet
 		String id = request.getParameter("id");
 		//Recuperamos la imagen que es un tipo blob de la base de datos
-		Blob img = ItemControl.getItem(id).getImg();
+		Blob img = daoItem.getItem(id).getImg();
 		byte[] blobFiles = null;
 		ServletOutputStream outputStream = null;
 		

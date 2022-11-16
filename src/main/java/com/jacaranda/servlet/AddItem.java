@@ -52,15 +52,17 @@ public class AddItem extends HttpServlet {
 	    //Conseguimos los bytes de la imagen
 	    InputStream fileContent = part.getInputStream();
 	    //Conseguimos un creador de datos blob para esta sesión y creamos un blob con la imagen
-	    Blob blob = Hibernate.getLobCreator(ConnectionDB.getSession()).createBlob(fileContent, fileContent.available());
+	    ConnectionDB connection = new ConnectionDB();
+	    Blob blob = Hibernate.getLobCreator(connection.getSession()).createBlob(fileContent, fileContent.available());
 	    
 	    Category aux = new Category(category);
 	    Item item = new Item(id, name, description, price, aux);
+	    ItemControl daoItem = new ItemControl();
 	    //Le añadimos al item la imagen de tipo blob
 	    item.setImg(blob);
 	    try {
-			ItemControl.addItem(item);
-			response.sendRedirect("addItem.jsp");
+			daoItem.addItem(item);
+			response.sendRedirect("addItem.jsp?msg=Item saved successfully");
 		} catch (Exception e) {
 			response.sendRedirect("addItem.jsp?msg=" + e.getMessage());
 		}

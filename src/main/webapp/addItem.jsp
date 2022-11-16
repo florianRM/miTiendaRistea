@@ -16,7 +16,8 @@
 <%
 String name = (String) session.getAttribute("username");
 String login = (String) session.getAttribute("login");
-List<Category> categoryList = CategoryControl.getCategories();
+List<Category> categoryList = daoCategory.getCategories();
+String errorMsg = request.getParameter("msg");
 %>
 <body>
 	<header>
@@ -66,6 +67,11 @@ List<Category> categoryList = CategoryControl.getCategories();
 			<div class="formField">
 				<label for="uploadFile">Image</label> 
 				<input type="file" name="uploadFile" class="uploadFile" required>
+			</div>
+			<div class="error">
+				<%if(errorMsg != null) {%>
+					<small><%=errorMsg %></small>
+				<%}%>
 			</div>
 			<div class="buttons">
 				<button type="submit" class="register">Add Item</button>

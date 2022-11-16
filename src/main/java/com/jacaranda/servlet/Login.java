@@ -41,10 +41,11 @@ public class Login extends HttpServlet {
 		
 		if(username != null && password != null) {
 			try {
+				UsersControl daoUser = new UsersControl();
 				String encriptedPass = DigestUtils.md5Hex(password);
 				Users user = new Users(username, encriptedPass);
 				
-				if(UsersControl.checkUser(user) == true) {
+				if(daoUser.checkUser(user)) {
 					response.sendRedirect("shop");
 				} else {
 					response.sendRedirect("index.jsp?msg=The user or password is not correct");

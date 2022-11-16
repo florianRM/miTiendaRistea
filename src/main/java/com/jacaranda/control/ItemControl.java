@@ -1,17 +1,18 @@
 package com.jacaranda.control;
 
 import org.hibernate.Session;
-
 import com.jacaranda.item.Item;
 
 public class ItemControl {
 	
-	private static Session session = ConnectionDB.getSession();
-
+	private Session session = null;
+	
 	public ItemControl() {
+		ConnectionDB connection = new ConnectionDB();
+		session = connection.getSession();
 	}
 	
-	public static void addItem(Item item) throws Exception {
+	public void addItem(Item item) throws Exception {
 		Item aux = session.get(Item.class, item.getId());
 		
 		if(aux != null) {
@@ -23,7 +24,7 @@ public class ItemControl {
 		session.getTransaction().commit();
 	}
 	
-	public static Item getItem(String id) {
+	public Item getItem(String id) {
 		return session.get(Item.class, id);
 	}
 }

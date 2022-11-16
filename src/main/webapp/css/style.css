@@ -306,6 +306,10 @@ i {
 	margin-top: 3%;
 }
 
+.main_addItem .error {
+	color: black;
+}
+
 .buttons a button {
 	color: white;
 	background: #1E8449;

@@ -5,13 +5,15 @@ import org.hibernate.Session;
 import com.jacaranda.users.Users;
 
 public class UsersControl {
-	
-	private static Session session = ConnectionDB.getSession();
+
+	private Session session = null;
 	
 	public UsersControl() {
+		ConnectionDB connection = new ConnectionDB();
+		session = connection.getSession();
 	}
 	
-	public static boolean checkUser(Users user) {
+	public boolean checkUser(Users user) {
 		boolean exist = false;
 		Users aux = null;
 		
@@ -24,7 +26,7 @@ public class UsersControl {
 		return exist;
 	}
 	
-	public static void registerUser(Users user) throws Exception {
+	public void registerUser(Users user) throws Exception {
 		try {
 			session.getTransaction().begin();
 			session.save(user);
@@ -34,7 +36,7 @@ public class UsersControl {
 		}
 	}
 	
-	public static Users getUser(Users user) {
+	public Users getUser(Users user) {
 		Users aux = null;
 		
 		aux = session.get(Users.class, user.getUsername());
