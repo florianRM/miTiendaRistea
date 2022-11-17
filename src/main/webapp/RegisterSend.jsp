@@ -1,8 +1,3 @@
-<%@page import="com.jacaranda.control.UsersControl"%>
-<%@page import="java.time.LocalTime"%>
-<%@page import="java.time.LocalDateTime"%>
-<%@page import="org.hibernate.tool.hbm2ddl.UniqueConstraintSchemaUpdateStrategy"%>
-<%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="org.apache.commons.codec.digest.DigestUtils"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -35,7 +30,7 @@
 		Users user = new Users(username, encriptedPassword, name, lastname, newDate, genderChar, false);
 		
 		try {
-			UsersControl.registerUser(user);
+			daoUsers.registerUser(user);
 			response.sendRedirect("index.jsp");
 		} catch(Exception e) {
 			response.sendRedirect("register.jsp?msg=" + e.getMessage());
