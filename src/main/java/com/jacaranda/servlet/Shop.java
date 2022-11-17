@@ -44,7 +44,12 @@ public class Shop extends HttpServlet {
 			response.sendRedirect("error.jsp?errorId=0002");
 		} else {
 			CategoryControl daoCategory = new CategoryControl();
-			UsersControl daoUser = new UsersControl();
+			UsersControl daoUser = null;
+			try {
+				daoUser = new UsersControl();
+			} catch (Exception e) {
+				response.sendRedirect("error.jsp?errorId=0001&msg=" + e.getMessage());
+			}
 			Users user = new Users(name, "");
 			boolean isAdmin = daoUser.getUser(user).isAdmin();
 			List<Category> categoryList = daoCategory.getCategories();

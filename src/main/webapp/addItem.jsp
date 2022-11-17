@@ -1,4 +1,3 @@
-<%@page import="com.jacaranda.control.CategoryControl"%>
 <%@page import="com.jacaranda.category.Category"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -16,6 +15,9 @@
 <%
 String name = (String) session.getAttribute("username");
 String login = (String) session.getAttribute("login");
+if(name != null && login != null) {
+	response.sendRedirect("error.jsp?errorId=0002");
+} else {
 List<Category> categoryList = daoCategory.getCategories();
 String errorMsg = request.getParameter("msg");
 %>
@@ -84,3 +86,4 @@ String errorMsg = request.getParameter("msg");
 </body>
 <script type="text/javascript" src="./js/dropMenu.js"></script>
 </html>
+<%}%>

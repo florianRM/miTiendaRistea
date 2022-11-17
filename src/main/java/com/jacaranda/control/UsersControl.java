@@ -8,8 +8,13 @@ public class UsersControl {
 
 	private Session session = null;
 	
-	public UsersControl() {
-		ConnectionDB connection = new ConnectionDB();
+	public UsersControl() throws Exception {
+		ConnectionDB connection = null;
+		try {
+			connection = new ConnectionDB();
+		} catch (Exception e) {
+			throw new Exception("Error establishing a database connection. Please contact an administrator.");
+		}
 		session = connection.getSession();
 	}
 	

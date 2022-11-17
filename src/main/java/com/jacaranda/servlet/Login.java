@@ -53,7 +53,6 @@ public class Login extends HttpServlet {
 			} catch (Exception e) {
 				response.sendRedirect("error.jsp?errorId=0001&msg=" + e.getMessage());
 			}
-			
 		} else {
 			response.sendRedirect("error.jsp?errorId=0003&message=Parameters cannot be null");
 		}
