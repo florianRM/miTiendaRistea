@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.jacaranda.carrito.ItemCart;
+import com.jacaranda.carrito.ShoppingCart;
 import com.jacaranda.category.Category;
 import com.jacaranda.control.CategoryControl;
 import com.jacaranda.control.UsersControl;
@@ -39,6 +41,7 @@ public class Shop extends HttpServlet {
 		HttpSession session = request.getSession();
 		String name = (String) session.getAttribute("username");
 		String login = (String) session.getAttribute("login");
+		ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
 		
 		if(login == null && name == null) {
 			response.sendRedirect("error.jsp?errorId=0002");
@@ -50,8 +53,7 @@ public class Shop extends HttpServlet {
 			} catch (Exception e) {
 				response.sendRedirect("error.jsp?errorId=0001&msg=" + e.getMessage());
 			}
-			Users user = new Users(name, "");
-			boolean isAdmin = daoUser.getUser(user).isAdmin();
+			boolean isAdmin = daoUser.getUser(name).isAdmin();
 			List<Category> categoryList = daoCategory.getCategories();
 			
 			PrintWriter out = response.getWriter();
@@ -62,6 +64,7 @@ public class Shop extends HttpServlet {
 					+ "<meta charset=\"ISO-8859-1\">\r\n"
 					+ "<title>Insert title here</title>\r\n"
 					+ "<link rel=\"stylesheet\" href=\"./css/style.css\">\r\n"
+					+ "<link rel=\"stylesheet\" href=\"./css/shopStyle.css\">\r\n"
 					+ "<script src=\"https://kit.fontawesome.com/acaa90b7af.js\" crossorigin=\"anonymous\"></script>"
 					+ "</head>\r\n"
 					+ "<body>\r\n");
@@ -74,7 +77,7 @@ public class Shop extends HttpServlet {
 			if(isAdmin) {
 				out.append("<li><a href=\"addItem.jsp\"><button class=\"addItem\">Add Item</button></a></li>\r\n");
 			}
-			out.append("			<li><a><i class=\"fa-solid fa-cart-shopping\"></i></a></li>\r\n"
+			out.append("			<li><a href=\"cart.jsp\"><i class=\"fa-solid fa-cart-shopping\"></i></a></li>\r\n"
 					+ "				<li><i class=\"fa-solid fa-user\"></i></li>\r\n"
 					+ "				<li class=\"user\"><strong>Welcome</strong><br>" + name + "</li>\r\n"
 					+ "			</ul>\r\n"
@@ -106,7 +109,20 @@ public class Shop extends HttpServlet {
 								out.append("<p>No photo yet</p>\r\n");
 							}
 							out.append("</div>\r\n"
-							+ "		</div>\r\n");
+									+ "<div class=\"buttons\">\r\n");
+							ItemCart auxItemCart = new ItemCart(item, daoUser.getUser(name));
+							if(cart == null || !cart.getItemList().contains(auxItemCart)) {
+								out.append("<div class=\"addToCart.jsp\">"
+										+ "<form action=\"addCart\" method=\"post\">"
+										+ "<input type=\"hidden\" name=\"id\" value=" + item.getId() + ">"
+										+ "<button type=\"submit\" class=\"addCart\">Add Cart</button>"
+										+ "</form>"
+										+ "</div>")	;
+							} else {
+								out.append("<button class=\"added\">Added</button>");
+							}
+							out.append("</div>"
+									+ "</div>\r\n");
 				}
 			}
 			//Por último cerramos la tabla y el html

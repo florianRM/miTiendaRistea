@@ -6,6 +6,7 @@
 <meta charset="ISO-8859-1">
 <title>BotanicaLandia</title>
 <link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./css/cartStyle.css">
 </head>
 <%
 	session.invalidate();

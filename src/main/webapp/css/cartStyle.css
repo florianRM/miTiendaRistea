@@ -1,0 +1,24 @@
+@charset "ISO-8859-1";
+
+form {
+	margin: 0;
+}
+
+.item {
+	display: flex;
+	flex-direction: row;
+	border: solid;
+	align-items: center;
+	padding: 10px;
+}
+
+.itemField {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-left: 10px;
+}
+
+.amount {
+	width: 40px;
+}

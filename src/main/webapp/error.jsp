@@ -38,7 +38,7 @@
 			<div class="message">
 				<h1>Error 500</h1>
 				<h3><%=msg %></h3>
-				<a href="index.jsp"><button class="return">Return log in</button></a>
+				<a href="cart.jsp"><button class="return">Return cart</button></a>
 			</div>
 		</div>
 		<%break;

@@ -1,10 +1,16 @@
 package com.jacaranda.users;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.jacaranda.carrito.ItemCart;
 
 @Entity
 public class Users {
@@ -17,6 +23,8 @@ public class Users {
 	private LocalDate date_birth;
 	private char gender;
 	private boolean admin;
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	List<ItemCart> itemsCart = new ArrayList<>();
 	
 	public Users() {
 		super();

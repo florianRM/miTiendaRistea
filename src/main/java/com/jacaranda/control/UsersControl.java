@@ -41,10 +41,10 @@ public class UsersControl {
 		}
 	}
 	
-	public Users getUser(Users user) {
+	public Users getUser(String user) {
 		Users aux = null;
 		
-		aux = session.get(Users.class, user.getUsername());
+		aux = session.get(Users.class, user);
 		
 		return aux;
 	}

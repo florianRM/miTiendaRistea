@@ -7,6 +7,81 @@ body {
 	font-size: 15px;
 }
 
+header {
+	display: flex;
+	background: #1E8449;
+	width: 100%;
+	height: 65px;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+}
+
+header > h1 {
+	color: white;
+}
+
+.icons {
+	position: absolute;
+	right: 12px;
+	overflow: hidden;
+}
+
+.icons > ul {
+	display: flex;
+	align-items: center;
+	list-style: none;
+}
+
+.icons > ul > li {
+	display: inline-block;
+	padding: 10px;
+}
+
+.user {
+	display: block;
+	color: white;
+	max-width: 60px;
+}
+
+i {
+	color: white;
+	font-size: 23px;
+	cursor: pointer;
+}
+
+.logout {
+	border-radius: 8px; 
+	border: none;
+	font-family: monospace;
+	font-size: 14px;
+	padding: 5px;
+	cursor: pointer;
+}
+
+.drop-menu {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	right: 0;
+	width: 9%;
+	background: #1E8449;
+	overflow: hidden;
+	height: 0;
+	transition-property: height;
+  	transition-duration: 0.5s;
+  	transition-timing-function: ease-in;
+  	margin: auto;
+  	border-bottom-left-radius: 8px;
+}
+
+.drop-menu-down {
+	background: #1E8449;
+	border-bottom-left-radius: 8px;
+	height: 5%;
+}
+
 /*Estilo pagina index */
 .container {
 	display: flex;
@@ -110,123 +185,6 @@ form {
 	margin-bottom: 1.2%;
 }
 
-/* Estilo de la pagina shop */
-header {
-	display: flex;
-	background: #1E8449;
-	width: 100%;
-	height: 65px;
-	justify-content: center;
-	align-items: center;
-	overflow: hidden;
-}
-
-header > h1 {
-	color: white;
-}
-
-.icons {
-	position: absolute;
-	right: 12px;
-	overflow: hidden;
-}
-
-.icons > ul {
-	display: flex;
-	align-items: center;
-	list-style: none;
-}
-
-.icons > ul > li {
-	display: inline-block;
-	padding: 10px;
-}
-
-.user {
-	display: block;
-	color: white;
-	max-width: 60px;
-}
-
-i {
-	color: white;
-	font-size: 23px;
-	cursor: pointer;
-}
-
-.grid-container {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-	grid-auto-rows: 480px;
-	margin: 10px 20px 0 20px;
-	gap: 20px;
-}
-
-.grid-item {
-	display: flex;
-	flex-direction: column;
-	border: solid;
-}
-
-.grid-item .item-info {
-	border-bottom: solid 1px;
-	padding-right: 10px;
-}
-
-.grid-item .item-title {
-	text-align: center;
-	border-bottom: solid 1px;
-}
-
-.grid-item .item-title h3 {
-	margin: 5px;
-}
-
-.grid-item .item-img {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
-}
-
-.grid-item .item-img img {
-	width: 100%;
-	height: 100%;
-}
-
-.drop-menu {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: absolute;
-	right: 0;
-	width: 9%;
-	background: #1E8449;
-	overflow: hidden;
-	height: 0;
-	transition-property: height;
-  	transition-duration: 0.5s;
-  	transition-timing-function: ease-in;
-  	margin: auto;
-  	border-bottom-left-radius: 8px;
-}
-
-.logout {
-	border-radius: 8px; 
-	border: none;
-	font-family: monospace;
-	font-size: 14px;
-	padding: 5px;
-	cursor: pointer;
-}
-
-.drop-menu-down {
-	background: #1E8449;
-	border-bottom-left-radius: 8px;
-	height: 5%;
-}
 
 /*Estilo pagina registro*/
 

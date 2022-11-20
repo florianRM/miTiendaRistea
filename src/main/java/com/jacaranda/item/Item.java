@@ -1,12 +1,17 @@
 package com.jacaranda.item;
 
 import java.sql.Blob;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
+import com.jacaranda.carrito.ItemCart;
 import com.jacaranda.category.Category;
 
 @Entity
@@ -20,6 +25,8 @@ public class Item {
 	@ManyToOne
 	private Category category;
 	private Blob img;
+	@OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
+	List<ItemCart> itemsCart = new ArrayList<>();
 	
 	public Item() {
 		super();

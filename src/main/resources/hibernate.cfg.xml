@@ -13,5 +13,6 @@
   <mapping class="com.jacaranda.users.Users"/>
   <mapping class="com.jacaranda.item.Item"/>
   <mapping class="com.jacaranda.category.Category"/>
+  <mapping class="com.jacaranda.carrito.ItemCart"/>
  </session-factory>
 </hibernate-configuration>
