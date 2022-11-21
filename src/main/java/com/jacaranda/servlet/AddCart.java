@@ -1,9 +1,6 @@
 package com.jacaranda.servlet;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +14,6 @@ import com.jacaranda.carrito.ShoppingCart;
 import com.jacaranda.control.ItemControl;
 import com.jacaranda.control.UsersControl;
 import com.jacaranda.item.Item;
-import com.jacaranda.users.Users;
 
 /**
  * Servlet implementation class AddCart
@@ -43,46 +39,47 @@ public class AddCart extends HttpServlet {
 		String user = (String) session.getAttribute("username");
 		String id = request.getParameter("id");
 		String operation = request.getParameter("operation");
+		boolean cancel = Boolean.parseBoolean(request.getParameter("cancel"));
 		
-		ItemControl daoItem = new ItemControl();
-		UsersControl daoUsers = null;
-		try {
-			daoUsers = new UsersControl();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		ItemCart item = null;
-		Item auxItem = daoItem.getItem(id);
-	
-		if(cart != null) {
-			item = new ItemCart(auxItem, daoUsers.getUser(user), 1, auxItem.getPrice());
-			int pos = cart.getItemList().indexOf(item);
-			if(pos != -1 && operation != null) {
-				int operationNumber = Integer.parseInt(operation);
-				ItemCart aux = cart.getItemList().get(pos);
-				aux.setAmount(aux.getAmount() + operationNumber);
-				aux.setPrice(auxItem.getPrice() * aux.getAmount());
-				response.sendRedirect("cart.jsp");
+		if(cancel) {
+			session.removeAttribute("cart");
+		} else if(id == null) {
+			response.sendRedirect("error.jsp?errorId=0003&msg=Id cannot be null.");
+		} else {
+			ItemControl daoItem = new ItemControl();
+			UsersControl daoUsers = null;
+			try {
+				daoUsers = new UsersControl();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Item auxItem = daoItem.getItem(id);
+			ItemCart item = null;
+			
+			if(cart != null) {
+				item = new ItemCart(auxItem, daoUsers.getUser(user), 1, auxItem.getPrice());
+				int pos = cart.getItemList().indexOf(item);
+				if(pos != -1 && operation != null) {
+					int operationNumber = Integer.parseInt(operation);
+					ItemCart aux = cart.getItemList().get(pos);
+					aux.setAmount(aux.getAmount() + operationNumber);
+					aux.setPrice(auxItem.getPrice() * aux.getAmount());
+					response.sendRedirect("cart.jsp");
+				} else {
+					cart.setItemList(item);
+					response.sendRedirect("shop");
+				}
+				
 			} else {
-				cart.setItemList(item);
+				ShoppingCart newCart = new ShoppingCart();
+				item = new ItemCart(daoItem.getItem(id), daoUsers.getUser(user), 1, auxItem.getPrice());
+				newCart.setItemList(item);
+				session.setAttribute("cart", newCart);
 				response.sendRedirect("shop");
 			}
-			
-		} else {
-			ShoppingCart newCart = new ShoppingCart();
-			item = new ItemCart(daoItem.getItem(id), daoUsers.getUser(user), 1, auxItem.getPrice());
-			newCart.setItemList(item);
-			session.setAttribute("cart", newCart);
-			response.sendRedirect("shop");
 		}
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 	}
 
 }

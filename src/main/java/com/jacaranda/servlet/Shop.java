@@ -17,7 +17,6 @@ import com.jacaranda.category.Category;
 import com.jacaranda.control.CategoryControl;
 import com.jacaranda.control.UsersControl;
 import com.jacaranda.item.Item;
-import com.jacaranda.users.Users;
 
 /**
  * Servlet implementation class Shop
@@ -114,7 +113,7 @@ public class Shop extends HttpServlet {
 							if(cart == null || !cart.getItemList().contains(auxItemCart)) {
 								out.append("<div class=\"addToCart.jsp\">"
 										+ "<input type=\"hidden\" name=\"id\" value=" + item.getId() + ">"
-										+ "<button type=\"button\" class=\"addCart\">Add Cart</button>"
+										+ "<button type=\"button\" class=\"addCart\" onclick=\"location.assign(`addCart?id=`)" + item.getId() + "\">Add Cart</button>"
 										+ "</div>")	;
 							} else {
 								out.append("<button class=\"added\">Added</button>");

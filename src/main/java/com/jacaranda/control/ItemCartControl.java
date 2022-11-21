@@ -1,7 +1,5 @@
 package com.jacaranda.control;
 
-import java.util.ArrayList;
-
 import org.hibernate.Session;
 
 import com.jacaranda.carrito.ItemCart;

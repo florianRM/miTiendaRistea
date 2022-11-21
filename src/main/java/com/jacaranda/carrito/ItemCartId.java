@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-import com.jacaranda.item.Item;
-import com.jacaranda.users.Users;
-
 public class ItemCartId implements Serializable {
 	/**
 	 * 
@@ -14,37 +11,47 @@ public class ItemCartId implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String user;
 	private String item;
+	private LocalDateTime purchase_date;
 	
 	public ItemCartId() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ItemCartId(String user, String item, int amount, double price, LocalDateTime date) {
+	public ItemCartId(String user, String item, LocalDateTime date) {
 		super();
 		this.user = user;
 		this.item = item;
+		this.purchase_date = date;
 	}
 
-	public String getUser() {
+	public String getUserId() {
 		return user;
 	}
 
-	public void setUser(String user) {
+	public void setUserId(String user) {
 		this.user = user;
 	}
 
-	public String getItem() {
+	public String getItemId() {
 		return item;
 	}
 
-	public void setItem(String item) {
+	public void setItemId(String item) {
 		this.item = item;
+	}
+	
+	public LocalDateTime getDate() {
+		return purchase_date;
+	}
+
+	public void setDate(LocalDateTime date) {
+		this.purchase_date = date;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(item, user);
+		return Objects.hash(purchase_date, item, user);
 	}
 
 	@Override
@@ -56,7 +63,8 @@ public class ItemCartId implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		ItemCartId other = (ItemCartId) obj;
-		return Objects.equals(item, other.item) && Objects.equals(user, other.user);
+		return Objects.equals(purchase_date, other.purchase_date) && Objects.equals(item, other.item)
+				&& Objects.equals(user, other.user);
 	}
 
 }

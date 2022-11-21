@@ -34,27 +34,30 @@
 </div>
 <div class="container_cart">
 	<%if(cart != null) {
-		for(ItemCart aux : cart.getItemList()) {%>
+		for(ItemCart aux : cart.getItemList()) {
+		String itemId = aux.getItem().getId();
+		%>
 		<div class="item">
-			<form action="addCart">
 				<div class="itemField">
 					<h4>Item name: </h4><span><%=aux.getItem().getName() %></span>
 				</div>
 				<div class="itemField">
 					<h4>Price: </h4><span><%=aux.getPrice() %></span>
 				</div>
-					<input type="hidden" name="id" value="<%=aux.getItem().getId() %>">
 					<div class="itemField">
 						<h4>Amount: </h4>
-						<button type="submit" class="removeItem">-</button>
+						<%if(aux.getAmount() == 1) {%>
+							<button class="removeItem" disabled="disabled">-</button>
+						<%} else {%>
+							<button type="submit" class="removeItem" onclick="location.assign('addCart?id=<%= itemId%>&operation=-1')">-</button>
+						<%}%>
 						<input name="amount" class="amount" value="<%=aux.getAmount() %>" readonly="readonly">
-						<button type="submit" class="addItemButton">+</button>
-						<input type="hidden" name="operation" id="operation">
+						<button class="addItemButton" onclick="location.assign('addCart?id=<%= itemId%>&operation=1')">+</button>
 					</div>
-			</form>
 		</div>
 	<%}%>
 		<a href="buyItem"><button>Buy</button></a>
+		<a href="shop"><button onclick="location.assign('addCart?cancel=true')">Cancel</button></a>
 	<%} else {%>
 		<div class="standarMsg">
 			<p>Cart is empty :(</p>
@@ -64,5 +67,4 @@
 </div>
 </body>
 <script type="text/javascript" src="./js/dropMenu.js"></script>
-<script type="text/javascript" src="./js/items.js"></script>
 </html>

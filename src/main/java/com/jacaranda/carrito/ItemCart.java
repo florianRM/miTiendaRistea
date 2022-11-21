@@ -74,7 +74,7 @@ public class ItemCart {
 	}
 
 	public double getPrice() {
-		return price;
+		return (double)Math.round(this.price * 100d) / 100d;
 	}
 
 	public void setPrice(double price) {
