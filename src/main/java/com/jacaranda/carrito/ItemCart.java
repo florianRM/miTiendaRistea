@@ -24,9 +24,11 @@ public class ItemCart {
 	@ManyToOne
 	@JoinColumn(name="username_id", insertable = false, updatable = false)
 	private Users user;
+	@Id
+	@JoinColumn(name="purchase_date", insertable = false, updatable = false)
+	private LocalDateTime purchase_date;
 	private int amount;
 	private double price;
-	private LocalDateTime purchase_date;
 	
 	public ItemCart() {
 		super();
@@ -38,8 +40,6 @@ public class ItemCart {
 		this.item = item;
 		this.user = user;
 	}
-
-
 
 	public ItemCart(Item item, Users user, int amount, double price) {
 		super();

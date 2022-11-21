@@ -36,7 +36,7 @@
 	<%if(cart != null) {
 		for(ItemCart aux : cart.getItemList()) {%>
 		<div class="item">
-			<form action="addCart" method="post">
+			<form action="addCart">
 				<div class="itemField">
 					<h4>Item name: </h4><span><%=aux.getItem().getName() %></span>
 				</div>
@@ -45,6 +45,7 @@
 				</div>
 					<input type="hidden" name="id" value="<%=aux.getItem().getId() %>">
 					<div class="itemField">
+						<h4>Amount: </h4>
 						<button type="submit" class="removeItem">-</button>
 						<input name="amount" class="amount" value="<%=aux.getAmount() %>" readonly="readonly">
 						<button type="submit" class="addItemButton">+</button>

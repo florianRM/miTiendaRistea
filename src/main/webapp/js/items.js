@@ -1,11 +1,12 @@
 /**
  * 
  */
-const formulario = document.querySelectorAll('form');
-const operation = document.getElementById('operation');
-const amount = document.querySelector('.amount');
+const container = document.querySelector('.container_cart');
 
-formulario.forEach(val => {
+container.forEach(val => {
+	if(val.querySelector('.amount').value == 1) {
+		val.querySelector('.removeItem').setAttribute('disabled', 'true');
+	}
 	val.addEventListener('click', (ev) => {
 		val.querySelector('#operation').value = ev.target.textContent + "1";
 	})

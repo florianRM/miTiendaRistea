@@ -44,6 +44,7 @@ public class BuyItem extends HttpServlet {
 			daoItemCart.addItems(aux);
 		}
 		session.removeAttribute("cart");
+		response.sendRedirect("shop");
 	}
 
 }

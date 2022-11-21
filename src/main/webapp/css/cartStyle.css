@@ -10,6 +10,8 @@ form {
 	border: solid;
 	align-items: center;
 	padding: 10px;
+	margin-top: 10px;
+	width: 20%;
 }
 
 .itemField {
@@ -21,4 +23,22 @@ form {
 
 .amount {
 	width: 40px;
+}
+
+a > button {
+	color: white;
+	background: #1E8449;
+	width: 10%;
+	border-radius: 5px;
+	border: none;
+	font-size: 15px;
+	padding: 6px;
+	cursor: pointer;
+	margin-top: 10px;
+}
+
+.standarMsg {
+	margin-left: 10px;
+	font-size: 20px;
+	font-weight: 600;
 }

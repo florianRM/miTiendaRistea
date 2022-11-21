@@ -34,14 +34,14 @@ CREATE TABLE CarritoCompra.Users
 
 CREATE TABLE CarritoCompra.Bought
 (
-    id VARCHAR(30),
-    username VARCHAR(50),
+    item_id VARCHAR(30),
+    username_id VARCHAR(50),
 	amount INT(6),
     price DECIMAL(4, 2),
     purchase_date DATE,
-    CONSTRAINT PK_Bought PRIMARY KEY(id, username),
-    CONSTRAINT FK_Bought_Id FOREIGN KEY (id) REFERENCES CarritoCompra.Item(id),
-    CONSTRAINT FK_Bought_Username FOREIGN KEY (username) REFERENCES CarritoCompra.Users(username)
+    CONSTRAINT PK_Bought PRIMARY KEY(item_id, username_id, purchase_date),
+    CONSTRAINT FK_Bought_Id FOREIGN KEY (item_id) REFERENCES CarritoCompra.Item(id),
+    CONSTRAINT FK_Bought_Username FOREIGN KEY (username_id) REFERENCES CarritoCompra.Users(username)
 );
 
 -- Insertamos un usuario administrador

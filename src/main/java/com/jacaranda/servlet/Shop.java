@@ -88,7 +88,7 @@ public class Shop extends HttpServlet {
 					+ "</div>");
 			
 			//Recorremos la lista de items y las vamos escribiendo en el html
-			out.append("<div class=\"grid-container\">");
+			out.append("<main class=\"grid-container\">");
 			for(Category category : categoryList) {
 				for(Item item : category.getItems()) {
 					out.append("<div class=\"grid-item\">\r\n"
@@ -113,10 +113,8 @@ public class Shop extends HttpServlet {
 							ItemCart auxItemCart = new ItemCart(item, daoUser.getUser(name));
 							if(cart == null || !cart.getItemList().contains(auxItemCart)) {
 								out.append("<div class=\"addToCart.jsp\">"
-										+ "<form action=\"addCart\" method=\"post\">"
 										+ "<input type=\"hidden\" name=\"id\" value=" + item.getId() + ">"
-										+ "<button type=\"submit\" class=\"addCart\">Add Cart</button>"
-										+ "</form>"
+										+ "<button type=\"button\" class=\"addCart\">Add Cart</button>"
 										+ "</div>")	;
 							} else {
 								out.append("<button class=\"added\">Added</button>");
@@ -126,9 +124,10 @@ public class Shop extends HttpServlet {
 				}
 			}
 			//Por último cerramos la tabla y el html
-			out.append("</div>\r\n"
+			out.append("</main>\r\n"
 					+ "</body>\r\n"
 					+ "<script type=\"text/javascript\" src=\"./js/dropMenu.js\"></script>"
+					+ "<script type=\"text/javascript\" src=\"./js/addItemCart.js\"></script>"
 					+ "</html>");
 		}
 	}
