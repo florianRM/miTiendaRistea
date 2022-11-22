@@ -34,8 +34,9 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		HttpSession session = request.getSession();
 		
+		//Recuperamos la sesión y le asignamos 2 parámetros
+		HttpSession session = request.getSession();
 		session.setAttribute("username", username);
 		session.setAttribute("login", "true");
 		
@@ -50,9 +51,11 @@ public class Login extends HttpServlet {
 				} else {
 					response.sendRedirect("index.jsp?msg=The user or password is not correct");
 				}
+			//Controlamos el error en caso de fallo en la conección
 			} catch (Exception e) {
 				response.sendRedirect("error.jsp?errorId=0001&msg=" + e.getMessage());
 			}
+		//Si introduce algún valor nulo se le redirige a una página de error
 		} else {
 			response.sendRedirect("error.jsp?errorId=0003&message=Parameters cannot be null");
 		}

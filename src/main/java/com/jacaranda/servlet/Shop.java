@@ -72,7 +72,8 @@ public class Shop extends HttpServlet {
 			out.append("<header>\r\n"
 					+ "		<h1>BotanicaLandia</h1>\r\n"
 					+ "		<div class=\"icons\">\r\n"
-					+ "			<ul>\r\n");
+					+ "			<ul>\r\n"
+					+ "		<li><a href=\"purchases.jsp\"><button class=\"purchases\">Purchases</button></a></li>\r\n");
 			if(isAdmin) {
 				out.append("<li><a href=\"addItem.jsp\"><button class=\"addItem\">Add Item</button></a></li>\r\n");
 			}
@@ -99,6 +100,7 @@ public class Shop extends HttpServlet {
 							+ "				<li>Id: " + item.getId() + "</li>\r\n"
 							+ "				<li>Description: " + item.getDescription() + "</li>\r\n"
 							+ "				<li>Price: " + item.getPrice() + "</li>\r\n"
+							+ "				<li>Amount: " + item.getAmount() + "</li>\r\n"
 							+ "			</ul>\r\n"
 							+ "		</div>\r\n"
 							+ "		<div class=\"item-img\">\r\n");

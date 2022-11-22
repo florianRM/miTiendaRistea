@@ -1,0 +1,18 @@
+@charset "ISO-8859-1";
+
+table {
+	margin: auto;
+}
+
+table, td, th {
+	border: solid 2px;
+	border-collapse: collapse;
+	padding: 15px;
+	text-align: center;
+}
+
+caption {
+	font-size: 25px;
+	font-weight: 600;
+	margin: 10px 0 10px 0;
+}

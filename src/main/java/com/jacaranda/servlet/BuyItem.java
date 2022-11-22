@@ -2,6 +2,7 @@ package com.jacaranda.servlet;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import com.jacaranda.carrito.ItemCart;
 import com.jacaranda.carrito.ShoppingCart;
 import com.jacaranda.control.ItemCartControl;
+import com.jacaranda.control.ItemControl;
 
 /**
  * Servlet implementation class BuyItem
@@ -36,14 +38,26 @@ public class BuyItem extends HttpServlet {
 		HttpSession session = request.getSession();
 		ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
 		ItemCartControl daoItemCart = new ItemCartControl();
-		LocalDateTime date = LocalDateTime.now();
+		boolean outStock = false;
 		
-		for(ItemCart aux : cart.getItemList()) {
-			aux.setDate(date);
-			daoItemCart.addItems(aux);
+		for (Iterator<ItemCart> iterator = cart.getItemList().iterator(); iterator.hasNext() && !outStock;) {
+			ItemCart itemCart = (ItemCart) iterator.next();
+			int finalAmount = itemCart.getItem().getAmount() - itemCart.getAmount();
+			
+			if(finalAmount <= 0) {
+				outStock = true;
+				response.sendRedirect("error.jsp?errorId=0003&msg=" + itemCart.getItem().getName() + "out of stock");
+			} else {
+				itemCart.setDate(LocalDateTime.now());
+				itemCart.getItem().setAmount(finalAmount);
+				daoItemCart.addItems(itemCart);
+			}
 		}
-		session.removeAttribute("cart");
-		response.sendRedirect("shop");
+		
+		if(!outStock) {
+			session.removeAttribute("cart");
+			response.sendRedirect("shop");
+		}
 	}
 
 }

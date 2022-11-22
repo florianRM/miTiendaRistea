@@ -241,7 +241,7 @@ form {
 	cursor: pointer;
 }
 
-.addItem {
+.addItem, .purchases {
 	color: #1E8449;
 	background: white;
 	border-radius: 5px;

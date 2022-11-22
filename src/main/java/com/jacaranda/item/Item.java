@@ -22,6 +22,7 @@ public class Item {
 	private String name;
 	private String description;
 	private double price;
+	private int amount;
 	@ManyToOne
 	private Category category;
 	private Blob img;
@@ -97,6 +98,14 @@ public class Item {
 
 	public void setImg(Blob img) {
 		this.img = img;
+	}
+	
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 
 	@Override

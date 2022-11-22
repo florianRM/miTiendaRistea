@@ -12,16 +12,19 @@
 <link rel="stylesheet" href="./css/style.css">
 <script src="https://kit.fontawesome.com/acaa90b7af.js" crossorigin="anonymous"></script>
 </head>
+<body>
 <%
+//Recuperamos los atributos de la sesión
 String name = (String) session.getAttribute("username");
 String login = (String) session.getAttribute("login");
-if(name != null && login != null) {
+
+//Comprobamos si la sesión esta iniciada si no se mostrará un error
+if(name == null && login == null) {
 	response.sendRedirect("error.jsp?errorId=0002");
 } else {
-List<Category> categoryList = daoCategory.getCategories();
-String errorMsg = request.getParameter("msg");
+	List<Category> categoryList = daoCategory.getCategories();
+	String errorMsg = request.getParameter("msg");
 %>
-<body>
 	<header>
 		<h1>BotanicaLandia</h1>
 		<div class="icons">
@@ -83,7 +86,7 @@ String errorMsg = request.getParameter("msg");
 			<a href="shop"><button class="register">Back shop</button></a>
 		</div>
 	</div>
+<%}%>
 </body>
 <script type="text/javascript" src="./js/dropMenu.js"></script>
 </html>
-<%}%>

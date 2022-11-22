@@ -37,12 +37,16 @@ public class AddCart extends HttpServlet {
 		HttpSession session = request.getSession();
 		ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
 		String user = (String) session.getAttribute("username");
+		
 		String id = request.getParameter("id");
+		//El párametro nos muestra si hay que restar o sumar 1 a la cantidad
 		String operation = request.getParameter("operation");
 		boolean cancel = Boolean.parseBoolean(request.getParameter("cancel"));
 		
+		//Comprobamos si ha pulsado el botón de cancelar el pedido y borramos el carrito
 		if(cancel) {
 			session.removeAttribute("cart");
+		//Comprobamos que no se haya introducido un id nulo
 		} else if(id == null) {
 			response.sendRedirect("error.jsp?errorId=0003&msg=Id cannot be null.");
 		} else {
@@ -51,15 +55,18 @@ public class AddCart extends HttpServlet {
 			try {
 				daoUsers = new UsersControl();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				response.sendRedirect("error.jsp");
 			}
 			Item auxItem = daoItem.getItem(id);
-			ItemCart item = null;
+			ItemCart itemCart = null;
 			
+			//Comprobamos si el carrito existe y si es así procedemos a introducir el item
 			if(cart != null) {
-				item = new ItemCart(auxItem, daoUsers.getUser(user), 1, auxItem.getPrice());
-				int pos = cart.getItemList().indexOf(item);
+				//Creamos el nuevo item carrito
+				itemCart = new ItemCart(auxItem, daoUsers.getUser(user), 1, auxItem.getPrice());
+				//Comprobamos si existe ese item en el carrito
+				int pos = cart.getItemList().indexOf(itemCart);
+				//Si existe le sumamos o le quitamos a la cantidad y hacemos lo mismo con el precio
 				if(pos != -1 && operation != null) {
 					int operationNumber = Integer.parseInt(operation);
 					ItemCart aux = cart.getItemList().get(pos);
@@ -67,14 +74,15 @@ public class AddCart extends HttpServlet {
 					aux.setPrice(auxItem.getPrice() * aux.getAmount());
 					response.sendRedirect("cart.jsp");
 				} else {
-					cart.setItemList(item);
+				//Si el item no existe en el carrito solo lo añadimos
+					cart.setItemList(itemCart);
 					response.sendRedirect("shop");
 				}
-				
+			//En caso de que no exista el carrito se crea un nuevo y se le agrega el item
 			} else {
 				ShoppingCart newCart = new ShoppingCart();
-				item = new ItemCart(daoItem.getItem(id), daoUsers.getUser(user), 1, auxItem.getPrice());
-				newCart.setItemList(item);
+				itemCart = new ItemCart(daoItem.getItem(id), daoUsers.getUser(user), 1, auxItem.getPrice());
+				newCart.setItemList(itemCart);
 				session.setAttribute("cart", newCart);
 				response.sendRedirect("shop");
 			}
