@@ -27,4 +27,12 @@ public class ItemControl {
 	public Item getItem(String id) {
 		return session.get(Item.class, id);
 	}
+	
+	public void updateAmount(String id, int amount) {
+		Item item = session.get(Item.class, id);
+		item.setAmount(amount);
+		session.getTransaction().begin();
+		session.update(item);
+		session.getTransaction().commit();
+	}
 }

@@ -17,9 +17,9 @@
 <body>
 <%
 	String name = (String) session.getAttribute("username");
-	boolean login = (boolean) session.getAttribute("login");
+	String login = (String) session.getAttribute("login");
 	
-	if(login && name != null) {
+	if(login != null && name != null) {
 		boolean isAdmin = daoUser.getUser(name).isAdmin();
 		List<ItemCart> purchasesList = daoItemCart.getPurchases(name);
 		purchasesList.sort(new OrderItemByDate());%>

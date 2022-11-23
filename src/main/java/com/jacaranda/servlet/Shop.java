@@ -112,11 +112,15 @@ public class Shop extends HttpServlet {
 							out.append("</div>\r\n"
 									+ "<div class=\"buttons\">\r\n");
 							ItemCart auxItemCart = new ItemCart(item, daoUser.getUser(name));
-							if(cart == null || !cart.getItemList().contains(auxItemCart)) {
-								out.append("<div class=\"addToCart.jsp\">"
+							if(item.getAmount() == 0) {
+								out.append("<button class=\"available\" disabled>Not available</button>");
+							} else if(cart == null || !cart.getItemList().contains(auxItemCart)) {
+								out.append("<form action=\"addCart\" method=\"post\">"
 										+ "<input type=\"hidden\" name=\"id\" value=" + item.getId() + ">"
-										+ "<button type=\"button\" class=\"addCart\" onclick=\"location.assign(`addCart?id=`)" + item.getId() + "\">Add Cart</button>"
-										+ "</div>")	;
+										+ "<label for=\"amount\">Amount:</label>"
+										+ "<input type=\"number\" name=\"amount\" class=\"amount\">"
+										+ "<button type=\"submit\" class=\"addCart\">Add Cart</button>\n"
+										+ "</form>")	;
 							} else {
 								out.append("<button class=\"added\">Added</button>");
 							}

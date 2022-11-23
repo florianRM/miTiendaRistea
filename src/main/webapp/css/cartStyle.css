@@ -25,7 +25,7 @@ form {
 	width: 40px;
 }
 
-a > button {
+a > button, .cancel {
 	color: white;
 	background: #1E8449;
 	width: 10%;

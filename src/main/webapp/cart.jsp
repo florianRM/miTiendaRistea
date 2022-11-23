@@ -48,20 +48,25 @@
 						<div class="itemField">
 							<h4>Price: </h4><span><%=aux.getPrice() %></span>
 						</div>
-							<div class="itemField">
-								<h4>Amount: </h4>
-								<%if(aux.getAmount() == 1) {%>
-									<button class="removeItem" disabled="disabled">-</button>
-								<%} else {%>
-									<button type="submit" class="removeItem" onclick="location.assign('addCart?id=<%= itemId%>&operation=-1')">-</button>
-								<%}%>
-								<input name="amount" class="amount" value="<%=aux.getAmount() %>" readonly="readonly">
-								<button class="addItemButton" onclick="location.assign('addCart?id=<%= itemId%>&operation=1')">+</button>
-							</div>
+							<form action="addCart" method="post">
+								<div class="itemField">
+									<h4>Amount: </h4>
+									<%if(aux.getAmount() == 1) {%>
+										<button class="removeItem" disabled="disabled">-</button>
+									<%} else {%>
+										<button type="submit" class="removeItem" name="operation" value="-1")>-</button>
+									<%}%>
+									<input type="hidden" name="id" value="<%= aux.getItem().getId()%>">
+									<input name="amount" class="amount" value="<%=aux.getAmount() %>" readonly="readonly">
+									<button class="addItemButton" name="operation" value="1")>+</button>
+								</div>
+							</form>
 				</div>
 			<%}%>
 				<a href="buyItem"><button>Buy</button></a>
-				<a href="shop"><button onclick="location.assign('addCart?cancel=true')">Cancel</button></a>
+				<form action="addCart" method="post">
+					<button class="cancel" name="cancel" value="true">Cancel</button>
+				</form>
 			<%} else {%>
 				<div class="standarMsg">
 					<p>Cart is empty :(</p>

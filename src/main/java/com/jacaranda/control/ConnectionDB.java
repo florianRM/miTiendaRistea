@@ -7,8 +7,8 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 public class ConnectionDB {
-	private StandardServiceRegistry sr;
-	private SessionFactory sf = null;
+	private static StandardServiceRegistry sr;
+	private static SessionFactory sf = null;
 	private Session session = null;
 	
 	public ConnectionDB() {
