@@ -118,7 +118,7 @@ public class Shop extends HttpServlet {
 								out.append("<form action=\"addCart\" method=\"post\">"
 										+ "<input type=\"hidden\" name=\"id\" value=" + item.getId() + ">"
 										+ "<label for=\"amount\">Amount:</label>"
-										+ "<input type=\"number\" name=\"amount\" class=\"amount\">"
+										+ "<input type=\"number\" name=\"amount\" class=\"amount\" min=\"0\" max=" + item.getAmount() +">"
 										+ "<button type=\"submit\" class=\"addCart\">Add Cart</button>\n"
 										+ "</form>")	;
 							} else {

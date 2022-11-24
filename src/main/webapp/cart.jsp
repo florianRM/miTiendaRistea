@@ -19,6 +19,7 @@
 	ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
 	String name = (String) session.getAttribute("username");
 	String login = (String) session.getAttribute("login");
+	String[] parameters = request.getParameterValues("msg");
 	
 	if(name == null && login != null) {
 		response.sendRedirect("error.jsp?errorId=0002");
@@ -73,6 +74,11 @@
 				</div>
 			<%}%>
 			<a href="shop"><button>Back shop</button></a>
+			<%if(parameters != null) {
+				for(String parameter : parameters) {%>
+					<p><%=parameter %></p>
+				<%}
+			}%>
 		</div>
 	<%} %>
 </body>

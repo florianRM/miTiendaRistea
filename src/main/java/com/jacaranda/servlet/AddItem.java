@@ -62,7 +62,7 @@ public class AddItem extends HttpServlet {
 	    item.setImg(blob);
 	    try {
 			daoItem.addItem(item);
-			response.sendRedirect("addItem.jsp?msg=Item saved successfully");
+			response.sendRedirect("addItem.jsp?addedMsg=Item saved successfully");
 		} catch (Exception e) {
 			response.sendRedirect("addItem.jsp?msg=" + e.getMessage());
 		}

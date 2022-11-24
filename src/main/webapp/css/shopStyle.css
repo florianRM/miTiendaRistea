@@ -73,3 +73,7 @@
 .available {
 	margin: 10px;
 }
+
+.addedMsg {
+	color: green;
+}

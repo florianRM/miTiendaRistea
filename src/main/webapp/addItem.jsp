@@ -24,6 +24,7 @@ if(name == null && login == null) {
 } else {
 	List<Category> categoryList = daoCategory.getCategories();
 	String errorMsg = request.getParameter("msg");
+	String addedMsg = request.getParameter("addedMsg");
 %>
 	<header>
 		<h1>BotanicaLandia</h1>
@@ -76,6 +77,8 @@ if(name == null && login == null) {
 			<div class="error">
 				<%if(errorMsg != null) {%>
 					<small><%=errorMsg %></small>
+				<%} else if(addedMsg != null) {%>
+					<small class="addedMsg"><%=addedMsg %></small>
 				<%}%>
 			</div>
 			<div class="buttons">

@@ -84,7 +84,8 @@ public class AddCart extends HttpServlet {
 			//En caso de que no exista el carrito se crea un nuevo y se le agrega el item
 			} else {
 				ShoppingCart newCart = new ShoppingCart();
-				itemCart = new ItemCart(daoItem.getItem(id), daoUsers.getUser(user), amountInt, auxItem.getPrice());
+				double price = auxItem.getPrice() * amountInt;
+				itemCart = new ItemCart(daoItem.getItem(id), daoUsers.getUser(user), amountInt, price);
 				newCart.setItemList(itemCart);
 				session.setAttribute("cart", newCart);
 				response.sendRedirect("shop");

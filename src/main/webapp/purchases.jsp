@@ -41,29 +41,25 @@
 			<button class="logout">Log out</button>
 		</div>
 		<div class="container_purchases">
-			<%if(purchasesList != null) {%>
-				<table>
-				<caption>Purchases details</caption>
-					<tr>
-						<th>Name</th>
-						<th>Item Name</th>
-						<th>Amount</th>
-						<th>Price</th>
-						<th>Purchase Date</th>
-					</tr>
-					<%for(ItemCart aux : purchasesList) {%>
-					<tr>
-						<td><%=aux.getUser().getName() %></td>
-						<td><%=aux.getItem().getName() %></td>
-						<td><%=aux.getPrice() %></td>
-						<td><%=aux.getAmount() %></td>
-						<td><%=aux.getDate() %></td>
-					<tr>
+			<table>
+			<caption>Purchases details</caption>
+				<tr>
+					<th>Name</th>
+					<th>Item Name</th>
+					<th>Amount</th>
+					<th>Price</th>
+					<th>Purchase Date</th>
+				</tr>
+				<%for(ItemCart aux : purchasesList) {%>
+				<tr>
+					<td><%=aux.getUser().getName() %></td>
+					<td><%=aux.getItem().getName() %></td>
+					<td><%=aux.getPrice() %></td>
+					<td><%=aux.getAmount() %></td>
+					<td><%=aux.getDate() %></td>
+				<tr>
 				<%} %>
-				</table>
-			<%} else {
-				out.append("<h3>You don't have purchases yet</h3>");
-			}%>
+			</table>
 		</div>
 	<%} else {
 		response.sendRedirect("error.jsp?errorId=0002");
