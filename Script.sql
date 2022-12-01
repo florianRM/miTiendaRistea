@@ -44,6 +44,12 @@ CREATE TABLE CarritoCompra.Bought
     CONSTRAINT FK_Bought_Username FOREIGN KEY (username_id) REFERENCES CarritoCompra.Users(username)
 );
 
+-- Añadimos la columna de cantidad al item
+ALTER TABLE CarritoCompra.Item ADD amount(6);
+
+UPDATE CarritoCompra.Item
+SET amount = 500;
+
 -- Insertamos un usuario administrador
 insert into CarritoCompra.Users values ('florian', '56910c52ed70539e3ce0391edeb6d339', 'Florian', 'Ristea', '2001-10-30', 'M', 1);
 
