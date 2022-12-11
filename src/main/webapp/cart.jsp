@@ -55,11 +55,15 @@
 									<%if(aux.getAmount() == 1) {%>
 										<button class="removeItem" disabled="disabled">-</button>
 									<%} else {%>
-										<button type="submit" class="removeItem" name="operation" value="-1")>-</button>
+										<button class="removeItem" name="operation" value="-1")>-</button>
 									<%}%>
 									<input type="hidden" name="id" value="<%= aux.getItem().getId()%>">
-									<input name="amount" class="amount" value="<%=aux.getAmount() %>" readonly="readonly">
-									<button class="addItemButton" name="operation" value="1")>+</button>
+									<input type="number" name="amount" class="amount" value="<%=aux.getAmount() %>" min="0" max="<%=aux.getItem().getAmount()%>">
+									<%if(aux.getAmount() == aux.getItem().getAmount()) {%>
+										<button class="addItemButton" name="operation" disabled="disabled">+</button>
+									<%} else {%>
+										<button class="addItemButton" name="operation" value="1")>+</button>
+									<%}%>
 								</div>
 							</form>
 				</div>

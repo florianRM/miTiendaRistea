@@ -61,7 +61,7 @@ if(name == null && login == null) {
 				<input type="number" name="price" class="price" step="0.01" required>
 			</div>
 			<div class="formField">
-				<label for="price">Price</label> 
+				<label for="category">Category</label> 
 				<select name="category" class="category" required>
 					<%
 						for(Category aux : categoryList) {

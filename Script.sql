@@ -37,7 +37,7 @@ CREATE TABLE CarritoCompra.Bought
     item_id VARCHAR(30),
     username_id VARCHAR(50),
 	amount INT(6),
-    price DECIMAL(4, 2),
+    price DECIMAL(10, 2),
     purchase_date DATE,
     CONSTRAINT PK_Bought PRIMARY KEY(item_id, username_id, purchase_date),
     CONSTRAINT FK_Bought_Id FOREIGN KEY (item_id) REFERENCES CarritoCompra.Item(id),
@@ -45,10 +45,7 @@ CREATE TABLE CarritoCompra.Bought
 );
 
 -- Añadimos la columna de cantidad al item
-ALTER TABLE CarritoCompra.Item ADD amount(6);
-
-UPDATE CarritoCompra.Item
-SET amount = 500;
+ALTER TABLE CarritoCompra.Item ADD amount INT(6) DEFAULT 500;
 
 -- Insertamos un usuario administrador
 insert into CarritoCompra.Users values ('florian', '56910c52ed70539e3ce0391edeb6d339', 'Florian', 'Ristea', '2001-10-30', 'M', 1);
